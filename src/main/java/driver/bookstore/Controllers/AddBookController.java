@@ -74,6 +74,11 @@ public class AddBookController implements Initializable {
     @FXML
     private TextField colorConfirm;
 
+    @FXML
+    private TextField quantityField;
+
+    @FXML
+    private TextField quantityConfirm;
     private ArrayList<CheckBox> categoriesChoices;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,6 +95,7 @@ private void getCategories() throws IOException {
     CheckBox choice = factory.createCategory("أدب");
     categoriesChoices.add(choice);
 }
+/**add checkboxes according to the categories*/
 private void getBookValues(){
     this.bNameConfirm.setText(this.bookNameField.getText());
     this.authConfirm.setText(this.authNameField.getText());
@@ -102,10 +108,11 @@ private void getBookValues(){
     this.colorConfirm.setText(this.printColorField.getSelectionModel().getSelectedItem());
     this.coverConfirm.setText(this.coverField.getSelectionModel().getSelectedItem());
     this.sourceConfirm.setText(this.sourceField.getSelectionModel().getSelectedItem());
+    this.quantityConfirm.setText(this.quantityField.getText());
 
 }
 
-
+/**adds (persists) a new book to database!*/
     public void addBookAction(ActionEvent event) {
     }
 }
