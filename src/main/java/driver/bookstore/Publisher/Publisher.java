@@ -1,16 +1,15 @@
-package driver.bookstore.Author;
-
+package driver.bookstore.Publisher;
 import driver.bookstore.Book.Book;
-
 import javax.persistence.*;
 import java.util.List;
 
-/**Author Entity*/
+/**Publisher Entity*/
 @Entity
-public class Author {
+public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ManyToMany(mappedBy= "authors")
+    @OneToMany(mappedBy = "publisher")
     private List<Book> books;
+
 }
