@@ -150,10 +150,11 @@ ArrayList<Category> categories = new ArrayList<>();
 
 
 private int getValue(String input){
-        if(input.isBlank()|| )
-            return 0;
-        else
+     try{
             return Integer.parseInt(input);
+     }catch (NumberFormatException ex){
+         return 0;
+     }
 
 }
 }
