@@ -1,7 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="driver.bookstore.Controllers.CategoryController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0" spacing="2.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="66.0" text="كتبجي">
+                           <font>
+                              <Font name="Bernard MT Condensed" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="29.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </HBox>
+                  <Button fx:id="homeButton" mnemonicParsing="false"  prefHeight="100.0" prefWidth="150.0" text="الرئيسية">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@home.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addBookButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"  prefHeight="100.0" prefWidth="150.0" text="إضافة كتاب">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@add_book.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="sellBookButton" layoutX="10.0" layoutY="70.0" mnemonicParsing="false"  prefHeight="100.0" prefWidth="150.0" text="بيع كتاب">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@sell_book.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="1.0" layoutY="-1.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="searchField" />
+                        <ComboBox fx:id="searchCriteria" prefWidth="150.0" promptText="ابحث بواسطة" />
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchHandle" text="ابحث" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="booksTable" nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="629.0">
+                     <columns>
+                        <TableColumn fx:id="bNameCol" prefWidth="75.0" text="اسم الكتاب" />
+                        <TableColumn fx:id="authNCol" prefWidth="75.0" text="المؤلفون" />
+                        <TableColumn fx:id="priceCol" prefWidth="64.0" text="السعر" />
+                        <TableColumn fx:id="categCol" prefWidth="79.0" text="التصنيف" />
+                        <TableColumn fx:id="publisherCol" prefWidth="82.0" text="دار النشر" />
+                        <TableColumn fx:id="quantityCol" prefWidth="53.0" text="الكمية" />
+                        <TableColumn fx:id="colorCol" prefWidth="103.0" text="لون الطباعة" />
+                        <TableColumn fx:id="locationCol" prefWidth="68.0" text="الموقع" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteHandle" prefHeight="40.0" prefWidth="95.0" text="حذف" />
+                        <Button fx:id="updateButton" layoutX="294.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateHandle" prefHeight="40.0" prefWidth="95.0" text="تعديل" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <effect>
+      <DisplacementMap>
+         <mapData>
+            <FloatMap />
+         </mapData>
+      </DisplacementMap>
+   </effect>
+</AnchorPane>
