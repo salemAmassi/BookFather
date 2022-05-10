@@ -6,9 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.io.File;
 import java.io.IOException;
 
@@ -17,12 +14,9 @@ import java.io.IOException;
  * */
 public class FxStore extends Application {
     public static Stage primaryStage;
-    //application context
-//    private ConfigurableApplicationContext applicationContext;
     @Override
     public void start(Stage stage) throws IOException {
-//        applicationContext.publishEvent(new StageReadyEvent(stage));
-        File dashboard  = new File("src/main/resources/AddBook.fxml");
+        File dashboard  = new File("src/main/resources/Home.fxml");
         Pane root = new FXMLLoader(dashboard.toURI().toURL()).load();
         Scene mainScene = new Scene(root);
         primaryStage = stage;
@@ -31,18 +25,15 @@ public class FxStore extends Application {
         primaryStage.show();
     }
 
-
     @Override
     public void init() throws Exception {
-super.init();
+        super.init();
     }
 
     @Override
     public void stop() {
-//       applicationContext.close();
         Platform.exit();
     }
-    //to give access to all listeners into the primary stage!
     public static void main(String[] args) {
         launch(args);
     }
