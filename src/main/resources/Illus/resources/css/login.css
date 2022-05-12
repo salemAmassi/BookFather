@@ -1,0 +1,8 @@
+@import "bootstrap3.css";
+
+.root {
+    -fx-background-image: url("../img/brand/loginBg.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: bottom;
+    -fx-background-repeat: no-repeat;
+}

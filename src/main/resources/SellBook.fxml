@@ -23,7 +23,7 @@
                            </font></Label>
                         <ImageView fitHeight="29.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@main_icon.png" />
+                              <Image url="@images/main_icon.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -38,7 +38,7 @@
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@home.png" />
+                              <Image url="@images/home.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -50,7 +50,7 @@
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@add_book.png" />
+                              <Image url="@images/add_book.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -62,7 +62,7 @@
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@sell_book.png" />
+                              <Image url="@images/sell_book.png" />
                            </image>
                         </ImageView>
                      </graphic>

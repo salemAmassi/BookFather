@@ -1,0 +1,28 @@
+@import "bootstrap3.css";
+
+.menuButton{
+    -fx-border-width: 0px 0px 0px 5px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #4E4F52;
+    -fx-background-color: #e5e5e5;
+    -fx-min-height: 90;
+}
+
+.menuButton:hover{
+    -fx-background-color: #f3f3f3;
+    /*-fx-text-fill: white;*/
+}
+
+#dashHead{
+    -fx-background-color: #e5e5e5;
+}
+#acDashBord{
+    -fx-background-color:#e5e5e5;
+}
+
+.table-view {
+    -fx-focus-color: #cecece;
+    -fx-effect: null;
+    -fx-outer-border : #cecece;
+}
