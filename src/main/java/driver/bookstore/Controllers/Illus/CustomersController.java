@@ -11,8 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
-import model.Customer;
-import model.Datasource;
+//import model.Customer;
+//import model.Datasource;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -27,8 +27,8 @@ public class CustomersController {
     public TextField fieldCustomersSearch;
     @FXML
     private StackPane customersContent;
-    @FXML
-    private TableView<Customer> tableCustomersPage;
+//    @FXML
+//    private TableView<Customer> tableCustomersPage;
 
     /**
      * This method lists all the customers to the view table.
@@ -38,16 +38,16 @@ public class CustomersController {
     @FXML
     public void listCustomers() {
 
-        Task<ObservableList<Customer>> getAllCustomersTask = new Task<ObservableList<Customer>>() {
-            @Override
-            protected ObservableList<Customer> call() {
-                return FXCollections.observableArrayList(Datasource.getInstance().getAllCustomers(Datasource.ORDER_BY_NONE));
-            }
-        };
-
-        tableCustomersPage.itemsProperty().bind(getAllCustomersTask.valueProperty());
-        addActionButtonsToTable();
-        new Thread(getAllCustomersTask).start();
+//        Task<ObservableList<Customer>> getAllCustomersTask = new Task<ObservableList<Customer>>() {
+//            @Override
+//            protected ObservableList<Customer> call() {
+//                return FXCollections.observableArrayList(Datasource.getInstance().getAllCustomers(Datasource.ORDER_BY_NONE));
+//            }
+//        };
+//
+//        tableCustomersPage.itemsProperty().bind(getAllCustomersTask.valueProperty());
+//        addActionButtonsToTable();
+//        new Thread(getAllCustomersTask).start();
 
     }
 
@@ -57,93 +57,93 @@ public class CustomersController {
      */
     @FXML
     private void addActionButtonsToTable() {
-        TableColumn colBtnEdit = new TableColumn("Actions");
-
-        Callback<TableColumn<Customer, Void>, TableCell<Customer, Void>> cellFactory = new Callback<TableColumn<Customer, Void>, TableCell<Customer, Void>>() {
-            @Override
-            public TableCell<Customer, Void> call(final TableColumn<Customer, Void> param) {
-                return new TableCell<Customer, Void>() {
-
-                    private final Button viewButton = new Button("View");
-                    {
-                        viewButton.getStyleClass().add("button");
-                        viewButton.getStyleClass().add("xs");
-                        viewButton.getStyleClass().add("info");
-                        viewButton.setOnAction((ActionEvent event) -> {
-                            Customer customerData = getTableView().getItems().get(getIndex());
-                            btnViewCustomer((int) customerData.getId());
-                            System.out.println("View Customer");
-                            System.out.println("customer id: " + customerData.getId());
-                            System.out.println("customer name: " + customerData.getFullname());
-                        });
-                    }
-
-                    private final Button editButton = new Button("Edit");
-
-                    {
-                        editButton.getStyleClass().add("button");
-                        editButton.getStyleClass().add("xs");
-                        editButton.getStyleClass().add("primary");
-                        editButton.setOnAction((ActionEvent event) -> {
-                            Customer customerData = getTableView().getItems().get(getIndex());
-                            btnEditCustomer((int) customerData.getId());
-                            System.out.println("Edit Customer");
-                            System.out.println("customer id: " + customerData.getId());
-                            System.out.println("customer name: " + customerData.getFullname());
-                        });
-                    }
-
-                    private final Button deleteButton = new Button("Delete");
-
-                    {
-                        deleteButton.getStyleClass().add("button");
-                        deleteButton.getStyleClass().add("xs");
-                        deleteButton.getStyleClass().add("danger");
-                        deleteButton.setOnAction((ActionEvent event) -> {
-                            Customer customerData = getTableView().getItems().get(getIndex());
-
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            alert.setHeaderText("Are you sure that you want to delete " + customerData.getFullname() + " ?");
-                            alert.setTitle("Delete " + customerData.getFullname() + " ?");
-                            Optional<ButtonType> deleteConfirmation = alert.showAndWait();
-
-                            if (deleteConfirmation.get() == ButtonType.OK) {
-                                System.out.println("Delete Customer");
-                                System.out.println("customer id: " + customerData.getId());
-                                System.out.println("customer name: " + customerData.getFullname());
-                                if (Datasource.getInstance().deleteSingleCustomer(customerData.getId())) {
-                                    getTableView().getItems().remove(getIndex());
-                                }
-                            }
-                        });
-                    }
-
-                    private final HBox buttonsPane = new HBox();
-
-                    {
-                        buttonsPane.setSpacing(10);
-//                        buttonsPane.getChildren().add(viewButton);
-//                        buttonsPane.getChildren().add(editButton);
-                        buttonsPane.getChildren().add(deleteButton);
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(buttonsPane);
-                        }
-                    }
-                };
-            }
-        };
-
-        colBtnEdit.setCellFactory(cellFactory);
-
-        tableCustomersPage.getColumns().add(colBtnEdit);
+//        TableColumn colBtnEdit = new TableColumn("Actions");
+//
+//        Callback<TableColumn<Customer, Void>, TableCell<Customer, Void>> cellFactory = new Callback<TableColumn<Customer, Void>, TableCell<Customer, Void>>() {
+//            @Override
+//            public TableCell<Customer, Void> call(final TableColumn<Customer, Void> param) {
+//                return new TableCell<Customer, Void>() {
+//
+//                    private final Button viewButton = new Button("View");
+//                    {
+//                        viewButton.getStyleClass().add("button");
+//                        viewButton.getStyleClass().add("xs");
+//                        viewButton.getStyleClass().add("info");
+//                        viewButton.setOnAction((ActionEvent event) -> {
+//                            Customer customerData = getTableView().getItems().get(getIndex());
+//                            btnViewCustomer((int) customerData.getId());
+//                            System.out.println("View Customer");
+//                            System.out.println("customer id: " + customerData.getId());
+//                            System.out.println("customer name: " + customerData.getFullname());
+//                        });
+//                    }
+//
+//                    private final Button editButton = new Button("Edit");
+//
+//                    {
+//                        editButton.getStyleClass().add("button");
+//                        editButton.getStyleClass().add("xs");
+//                        editButton.getStyleClass().add("primary");
+//                        editButton.setOnAction((ActionEvent event) -> {
+//                            Customer customerData = getTableView().getItems().get(getIndex());
+//                            btnEditCustomer((int) customerData.getId());
+//                            System.out.println("Edit Customer");
+//                            System.out.println("customer id: " + customerData.getId());
+//                            System.out.println("customer name: " + customerData.getFullname());
+//                        });
+//                    }
+//
+//                    private final Button deleteButton = new Button("Delete");
+//
+//                    {
+//                        deleteButton.getStyleClass().add("button");
+//                        deleteButton.getStyleClass().add("xs");
+//                        deleteButton.getStyleClass().add("danger");
+//                        deleteButton.setOnAction((ActionEvent event) -> {
+//                            Customer customerData = getTableView().getItems().get(getIndex());
+//
+//                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//                            alert.setHeaderText("Are you sure that you want to delete " + customerData.getFullname() + " ?");
+//                            alert.setTitle("Delete " + customerData.getFullname() + " ?");
+//                            Optional<ButtonType> deleteConfirmation = alert.showAndWait();
+//
+//                            if (deleteConfirmation.get() == ButtonType.OK) {
+//                                System.out.println("Delete Customer");
+//                                System.out.println("customer id: " + customerData.getId());
+//                                System.out.println("customer name: " + customerData.getFullname());
+//                                if (Datasource.getInstance().deleteSingleCustomer(customerData.getId())) {
+//                                    getTableView().getItems().remove(getIndex());
+//                                }
+//                            }
+//                        });
+//                    }
+//
+//                    private final HBox buttonsPane = new HBox();
+//
+//                    {
+//                        buttonsPane.setSpacing(10);
+////                        buttonsPane.getChildren().add(viewButton);
+////                        buttonsPane.getChildren().add(editButton);
+//                        buttonsPane.getChildren().add(deleteButton);
+//                    }
+//
+//                    @Override
+//                    public void updateItem(Void item, boolean empty) {
+//                        super.updateItem(item, empty);
+//
+//                        if (empty) {
+//                            setGraphic(null);
+//                        } else {
+//                            setGraphic(buttonsPane);
+//                        }
+//                    }
+//                };
+//            }
+//        };
+//
+//        colBtnEdit.setCellFactory(cellFactory);
+//
+//        tableCustomersPage.getColumns().add(colBtnEdit);
 
     }
 
@@ -153,16 +153,16 @@ public class CustomersController {
      * @since                   1.0.0
      */
     public void btnCustomersSearchOnAction() {
-        Task<ObservableList<Customer>> searchCustomersTask = new Task<ObservableList<Customer>>() {
-            @Override
-            protected ObservableList<Customer> call() {
-                return FXCollections.observableArrayList(
-                        Datasource.getInstance().searchCustomers(fieldCustomersSearch.getText().toLowerCase(), Datasource.ORDER_BY_NONE));
-            }
-        };
-        tableCustomersPage.itemsProperty().bind(searchCustomersTask.valueProperty());
-
-        new Thread(searchCustomersTask).start();
+//        Task<ObservableList<Customer>> searchCustomersTask = new Task<ObservableList<Customer>>() {
+//            @Override
+//            protected ObservableList<Customer> call() {
+//                return FXCollections.observableArrayList(
+//                        Datasource.getInstance().searchCustomers(fieldCustomersSearch.getText().toLowerCase(), Datasource.ORDER_BY_NONE));
+//            }
+//        };
+//        tableCustomersPage.itemsProperty().bind(searchCustomersTask.valueProperty());
+//
+//        new Thread(searchCustomersTask).start();
     }
 
     /**
@@ -216,23 +216,23 @@ public class CustomersController {
      */
     @FXML
     private void fillEditCustomer(int customer_id) {
-
-        Task<ObservableList<Customer>> fillCustomerTask = new Task<ObservableList<Customer>>() {
-            @Override
-            protected ObservableList<Customer> call() {
-                return FXCollections.observableArrayList(
-                        Datasource.getInstance().getOneCustomer(customer_id));
-            }
-        };
-        fillCustomerTask.setOnSucceeded(e -> {
-//            fieldAddCustomerNameEdit.setText("test");
-            System.out.println("pr name:" + fillCustomerTask.valueProperty().getValue().get(0).getFullname());
-            // TODO
-            //  fieldAddCustomerName.setText("test");
-            //  fieldAddCustomerName.setText(fillCustomerTask.valueProperty().getValue().get(0).getName());
-        });
-
-        new Thread(fillCustomerTask).start();
+//
+//        Task<ObservableList<Customer>> fillCustomerTask = new Task<ObservableList<Customer>>() {
+//            @Override
+//            protected ObservableList<Customer> call() {
+//                return FXCollections.observableArrayList(
+//                        Datasource.getInstance().getOneCustomer(customer_id));
+//            }
+//        };
+//        fillCustomerTask.setOnSucceeded(e -> {
+////            fieldAddCustomerNameEdit.setText("test");
+//            System.out.println("pr name:" + fillCustomerTask.valueProperty().getValue().get(0).getFullname());
+//            // TODO
+//            //  fieldAddCustomerName.setText("test");
+//            //  fieldAddCustomerName.setText(fillCustomerTask.valueProperty().getValue().get(0).getName());
+//        });
+//
+//        new Thread(fillCustomerTask).start();
     }
 
 }

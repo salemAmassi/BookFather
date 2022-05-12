@@ -1,8 +1,7 @@
 package driver.bookstore.Controllers.Illus.products;
 
+import driver.bookstore.Book.BookRepository;
 import driver.bookstore.Category.Category;
-import javafx.collections.FXCollections;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
@@ -10,8 +9,9 @@ import javafx.scene.text.Text;
 /**
  * {@inheritDoc}
  */
-public class AddProductController extends ProductsController {
+public class AddBookController extends BooksController {
 
+    BookRepository repository;
     @FXML
     public ComboBox<Category> fieldAddBookCategory;
     public Text viewProductResponse;
@@ -27,6 +27,8 @@ public class AddProductController extends ProductsController {
     public ComboBox fieldAddBookCover;
     public ComboBox fieldAddBookSource;
     public TextField fieldAddBookPublisher;
+    public TextField fieldAddBookQuantity;
+    public TextField fieldAddBookLocation;
 
 
     @FXML
@@ -46,7 +48,7 @@ public class AddProductController extends ProductsController {
      * @since                   1.0.0
      */
     @FXML
-    private void btnAddProductOnAction() {
+    private void btnAddBookOnAction() {
         //TODO: retrieve entities on initialize, Category, Size, Cover, Source
         Category category = fieldAddBookCategory.getSelectionModel().getSelectedItem();
         int cat_id = 0;

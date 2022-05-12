@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Illus.products.ProductsController">
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Illus.products.BooksController">
    <StackPane fx:id="productsContent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
 
@@ -37,7 +37,7 @@
                       </BorderPane.margin>
                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
                           <TextField fx:id="fieldProductsSearch" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="291.0" promptText="search by book name or description" />
-                          <Button layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnProductsSearchOnAction" prefHeight="26.0" styleClass="button, info, sm" text="Search" />
+                          <Button layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnBooksSearchOnAction" prefHeight="26.0" styleClass="button, info, sm" text="Search" />
                      <ComboBox layoutX="359.0" layoutY="2.0" prefHeight="26.0" prefWidth="173.0" />
                       </AnchorPane>
                        <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAddProductOnClick" prefHeight="26.0" styleClass="button, success, sm" text="Add New Book" textAlignment="RIGHT" GridPane.columnIndex="1" />

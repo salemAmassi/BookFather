@@ -1,13 +1,12 @@
 package driver.bookstore.Controllers.Illus;
 
 //import controller.UserSessionController;
-import driver.bookstore.Controllers.Illus.products.ProductsController;
+import driver.bookstore.Controllers.Illus.products.BooksController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -37,7 +36,7 @@ public class MainDashboardController implements Initializable {
     @FXML
     private StackPane dashContent;
     @FXML
-    private Label lblUsrName;
+    //private Label lblUsrName;
 
 
     /**
@@ -60,9 +59,9 @@ public class MainDashboardController implements Initializable {
      * @since                   1.0.0
      */
     public void btnProductsOnClick(ActionEvent actionEvent) {
-        FXMLLoader fxmlLoader = loadFxmlPage("/view/admin/pages/products/products.fxml");
-        ProductsController controller = fxmlLoader.getController();
-        controller.listProducts();
+        FXMLLoader fxmlLoader = loadFxmlPage("/view/admin/pages/products/books.fxml");
+        BooksController controller = fxmlLoader.getController();
+        controller.listBooks();
     }
 
     /**

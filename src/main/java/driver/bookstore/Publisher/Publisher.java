@@ -13,6 +13,14 @@ public class Publisher {
     private int id;
     @Column(name = "name", length = 200)
     private String name;
+
+    public Publisher(String name) {
+        this.name = name;
+    }
+
+    public Publisher() {
+
+    }
 //    @OneToMany(mappedBy = "publisher",cascade = CascadeType.ALL)
 //    private List<Book> books;
 

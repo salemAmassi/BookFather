@@ -6,8 +6,8 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.Order;
-import model.Datasource;
+//import model.Order;
+//import model.Datasource;
 
 /**
  * This class handles the admin orders page.
@@ -15,8 +15,8 @@ import model.Datasource;
  */
 public class OrdersController {
 
-    @FXML
-    private TableView<Order> tableOrdersPage;
+//    @FXML
+//    private TableView<Order> tableOrdersPage;
 
     /**
      * This method lists all the orders to the view table.
@@ -25,14 +25,14 @@ public class OrdersController {
      */
     @FXML
     public void listOrders() {
-        Task<ObservableList<Order>> getAllOrdersTask = new Task<ObservableList<Order>>() {
-            @Override
-            protected ObservableList<Order> call() {
-                return FXCollections.observableArrayList(Datasource.getInstance().getAllOrders(Datasource.ORDER_BY_NONE));
-            }
-        };
-        tableOrdersPage.itemsProperty().bind(getAllOrdersTask.valueProperty());
-        new Thread(getAllOrdersTask).start();
+//        Task<ObservableList<Order>> getAllOrdersTask = new Task<ObservableList<Order>>() {
+//            @Override
+//            protected ObservableList<Order> call() {
+//                return FXCollections.observableArrayList(Datasource.getInstance().getAllOrders(Datasource.ORDER_BY_NONE));
+//            }
+//        };
+//        tableOrdersPage.itemsProperty().bind(getAllOrdersTask.valueProperty());
+//        new Thread(getAllOrdersTask).start();
     }
 
     public void btnOrdersSearchOnAction(ActionEvent actionEvent) {
