@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Publisher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    @Column(name = "name", length = 200)
+    @Column(name = "name", length = 200, unique=true)
     private String name;
 
     public Publisher(String name) {

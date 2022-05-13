@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.lang.annotation.Annotation;
 import java.util.List;
 //                    "(Book b left join book_category on Book.id = book_category.bookId) " +
+//            @NamedQuery(name = "Book.findByAuthor",
+//            query = "SELECT b from Book b " +
+//                    "where b.AuthorId"
+
 /**Book Entity*/
 @Entity
 @Getter
@@ -16,27 +20,36 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "book")
+//@NamedQueries(
+//        {
+//                @NamedQuery(name = "Book.findAll", query = "SELECT b from Book b"),
+//                @NamedQuery(name = "Book.findByCategory",
+//                        query = "SELECT b " +
+//                                "from Book b join b.categories Category c " +
+//                                " where c.name = :categoryName")
+//        })
+//        @NamedNativeQueries(
+//                @NamedNativeQuery(name = "Book.findByCategory",
+//                        query = "SELECT b.name FROM book b " +
+//                                "WHERE b.id EXISTS(" +
+//                                "    SELECT bc.book_id " +
+//                                "    FROM" +
+//                                "        book_category bc" +
+//                                "    JOIN category c ON" +
+//                                "        bc.category_id = c.ID" +
+//                                "    WHERE\n" +
+//                                "        c.name = ?categoryName;\n" +
+//                                "); ")
+//        )
+
 public class Book implements Entity{
-//    @NamedQueries(
-//            @NamedQuery(name = "Book.findAll", query = "SELECT b from Book b"),
-//            //needs checking!
-//            @NamedQuery(name = "Book.findByCategory",
-//                    query =
-//                    "SELECT b from Book b " +
-//                    "where b.categoryId in(" +
-//                    " SELECT c.id from" +
-//                    "book_category join Category on book_category.categoryId = Category.id " +
-//                    "  where Category.name = :categoryName)"),
-//            @NamedQuery(name = "Book.findByAuthor",
-//            query = "SELECT b from Book b " +
-//                    "where b.AuthorId"
-//            )
-//    )
+    //TODO: CREATE ALL QUERIES FOR BOOK, CATEGORY.
     @Id @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
      int id;
-    @Column(name = "name", nullable = false, length = 200)
+    @Column(name = "name", nullable = false, length = 200,  unique=true)
      String name;
 
     @Column(name = "price", nullable = false, length = 3)

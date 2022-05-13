@@ -6,9 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
-/**
- * {@inheritDoc}
- */
+
 public class AddBookController extends BooksController {
 
     BookRepository repository;
@@ -36,10 +34,11 @@ public class AddBookController extends BooksController {
         //fieldAddProductCategoryId.setItems(FXCollections.observableArrayList(Datasource.getInstance().getProductCategories(Datasource.ORDER_BY_ASC)));
         // TODO: Format all fields
         TextFormatter<Double> textFormatterDouble = formatDoubleField();
-        TextFormatter<Integer> textFormatterInt = formatIntField();
+        TextFormatter<Integer> textFormatterInt_page = formatIntField();
+        TextFormatter<Integer> textFormatterInt_part = formatIntField();
         fieldAddBookPrice.setTextFormatter(textFormatterDouble);
-        fieldAddBookPart.setTextFormatter(textFormatterInt);
-        fieldAddBookPages.setTextFormatter(textFormatterInt);
+        fieldAddBookPart.setTextFormatter(textFormatterInt_part);
+        fieldAddBookPages.setTextFormatter(textFormatterInt_page);
     }
 
     /**

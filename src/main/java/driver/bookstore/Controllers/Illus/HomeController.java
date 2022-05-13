@@ -1,60 +1,37 @@
 package driver.bookstore.Controllers.Illus;
 
-import javafx.concurrent.Task;
+import driver.bookstore.Book.Book;
+import driver.bookstore.Book.BookRepository;
+import driver.bookstore.Category.Category;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-//import model.Datasource;
 
-/**
- * This class handles the admin home page.
- * @author      Sajmir Doko
- */
-public class HomeController {
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class HomeController implements Initializable {
+
 
     @FXML
-    public Label productsCount;
+    private Label booksCount;
     @FXML
-    public Label customersCount;
-
-    /**
-     * This method gets the products count for the admin dashboard and sets it to the productsCount label.
-     * @since                   1.0.0
-     */
-    public void getDashboardProdCount() {
-//        Task<Integer> getDashProdCount = new Task<Integer>() {
-//            @Override
-//            protected Integer call() {
-//                return Datasource.getInstance().countAllProducts();
-//            }
-//        };
-//
-//        getDashProdCount.setOnSucceeded(e -> {
-//            productsCount.setText(String.valueOf(getDashProdCount.valueProperty().getValue()));
-//        });
-//
-//        new Thread(getDashProdCount).start();
+    private Label categoriesCount;
+    private BookRepository repo;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+         repo = new BookRepository();
+        booksCount.setText(getBooksCount()+"");
+        categoriesCount.setText(getCategoriesCount()+"");
+    }
+    private int getBooksCount(){
+       return repo.manager.createNativeQuery("SELECT count(id) FROM Book;", Book.class).getFirstResult();
+    }
+    private int getCategoriesCount(){
+        EntityManager manager = Persistence.createEntityManagerFactory("book_unit").createEntityManager();
+        return manager.createNativeQuery("SELECT max(c.id) FROM Book c ;", Category.class).getFirstResult();
     }
 
-    /**
-     * This method gets the customers count for the admin dashboard and sets it to the customersCount label.
-     * @since                   1.0.0
-     */
-    public void getDashboardCostCount() {
-//        Task<Integer> getDashCostCount = new Task<Integer>() {
-//            @Override
-//            protected Integer call() {
-//                return Datasource.getInstance().countAllCustomers();
-//            }
-//        };
-//
-//        getDashCostCount.setOnSucceeded(e -> {
-//            customersCount.setText(String.valueOf(getDashCostCount.valueProperty().getValue()));
-//        });
-//
-//        new Thread(getDashCostCount).start();
-    }
-
-    // TODO
-    //  Add best sellers
-    //  Add latest sold products
 }

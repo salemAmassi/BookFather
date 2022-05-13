@@ -1,9 +1,10 @@
 package driver.bookstore.Book;
 
 import driver.bookstore.Repository;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**Crud operations on Book*/
 public class BookRepository implements Repository {
@@ -49,10 +50,28 @@ public class BookRepository implements Repository {
     @Override
     public void addEntity(Entity entity) {
     manager.getTransaction().begin();
-    manager.persist(entity);
+    manager.persist(entity);//add
     manager.getTransaction().commit();
     }
+    //TODO: casting Object to Book
+public List<Book> getBookByCategory(String categoryName){
+        TypedQuery<Book> query = manager.createQuery("SELECT " +
+                "   distinct b " +
+                "FROM " +
+                "Book b join b.categories  c " +
+                " where c.name = :categoryName ",Book.class).setParameter("categoryName",categoryName);
+List<Book> books =  query.getResultList();
+return books;
 
+}
+public List<Book> getBookByCategories(ArrayList<String> categories){
+    TypedQuery<Book> query = manager.createQuery("SELECT " +
+            "   distinct b " +
+            "FROM " +
+            "        Book b join b.categories  c " +
+            " where c.name in :categories ",Book.class).setParameter("categories",categories);
+    return query.getResultList();
+}
     @Override
     public void close() {
         manager.close();
