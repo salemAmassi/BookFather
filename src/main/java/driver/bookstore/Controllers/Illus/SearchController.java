@@ -21,12 +21,12 @@ public class SearchController {
             case "title":
             return
                         bookRepository.manager
-                        .createQuery("SELECT b from Book b where b.name = :name")
-                        .setParameter("name",searchValue).getResultList();
+                        .createQuery("SELECT b from Book b where b.name like :name")
+                        .setParameter("name","%"+searchValue+"%").getResultList();
             case "author":
                return bookRepository.manager
-                        .createQuery("SELECT b from Book b where b.author.name = :AuthorName")
-                        .setParameter("AuthorName",searchValue).getResultList();
+                        .createQuery("SELECT b from Book b where b.author in (SELECT a from Author a where a.name like :AuthorName)")
+                        .setParameter("AuthorName","%"+searchValue+"%").getResultList();
             case "price":
                 return bookRepository.manager
                         .createQuery("SELECT b from Book b where b.price = :price")

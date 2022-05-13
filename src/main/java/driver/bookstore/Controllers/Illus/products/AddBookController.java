@@ -76,35 +76,41 @@ public class AddBookController implements Initializable {
     @FXML
     private void btnAddBookOnAction(){
         chosenCategories = fieldAddBookCategory.getChildren().stream().filter(checkbox->((CheckBox)checkbox).isSelected()).map(checkbox->(new Category(((CheckBox) checkbox).getText()))).collect(Collectors.toList());
-       String paintColor = String.valueOf(colors.getSelectedToggle());
-       Author author = new Author(fieldAddBookAuthor.getText());
-       Publisher publisher = new Publisher(fieldAddBookPublisher.getText());
-       authorRepository.addEntity( author);
-//       publisherRepository.addEntity(publisher);
+        String paintColor = "0";
+        if(colors.getSelectedToggle() == coloredChoice){
+            paintColor = "1";
+        }else if(colors.getSelectedToggle() == bwChoice){
+            paintColor = "0";
+        }
+        String size = "B5";
+        System.out.println(fieldAddBookSize.getSelectionModel().getSelectedItem());
+        Author author = new Author(fieldAddBookAuthor.getText());
+        Publisher publisher = new Publisher(fieldAddBookPublisher.getText());
+        author = authorRepository.addEntity(author);
+        publisher = publisherRepository.addEntity(publisher);
         Book book =
                 Book.builder()
-                        .name(fieldAddBookTitle.getText())
-                        .author((Author) authorRepository.findEntity(author.getName()).get(0))
-                        .price(getValue(fieldAddBookPrice.getText()))
-                        .pageNo(getValue(fieldAddBookPages.getText()))
-                        .partNo(getValue(fieldAddBookPart.getText()))
-                        .cover(fieldAddBookCover.getSelectionModel().getSelectedItem().toString())
-                        .paintColor(paintColor)//needs to set 0 and 1
-                        .isbn(fieldAddBookIsbn.getText()) //isbn needs control
-                        .size(fieldAddBookSize.getSelectionModel().getSelectedItem().toString())
-                        .categories(chosenCategories)
-                        .publisher(publisher)
-                        .location(getValue(fieldAddBookLocation.getText()))
-                        .build();
-        bookRepository.addEntity(book);
-    }
-    private int getValue(String input){
-        try{
-            return Integer.parseInt(input);
-        }catch (NumberFormatException ex){
-            return 0;
+            .name(fieldAddBookTitle.getText())
+            .author(author)
+            .price(getValue(fieldAddBookPrice.getText()))
+            .pageNo(getValue(fieldAddBookPages.getText()))
+            .partNo(getValue(fieldAddBookPart.getText()))
+            .cover(fieldAddBookCover.getSelectionModel().getSelectedItem())
+            .paintColor(paintColor)//needs to set 0 and 1
+            .isbn(fieldAddBookIsbn.getText()) //isbn needs control
+            .size(fieldAddBookSize.getSelectionModel().getSelectedItem())
+            .categories(chosenCategories)
+            .publisher(publisher)
+            .location(getValue(fieldAddBookLocation.getText()))
+            .build();
+            bookRepository.addEntity(book);
         }
-
+        private int getValue(String input){
+            try{
+                return Integer.parseInt(input);
+            }catch (NumberFormatException ex){
+                return 0;
+            }
     }
 
 //
