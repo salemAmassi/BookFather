@@ -242,7 +242,10 @@ VBox > .split-menu-button.last > .arrow-button {
 .split-menu-button.success > .label, .split-menu-button.success > .arrow-button {
 	-fx-background-color: #5cb85c;
 }
-
+.button.fail{
+	-fx-background-color: #8b0a15;
+	-fx-text-fill: white;
+}
 .button.success,.menu-button.success,.toggle-button.success,
 .split-menu-button.success > .label,.split-menu-button.success > .arrow-button {
 	-fx-border-color: #4cae4c;

@@ -1,18 +1,27 @@
 package driver.bookstore.Controllers.Illus.products;
 
 //import app.utils.HelperMethods;
+import driver.bookstore.Author.Author;
+import driver.bookstore.Book.Book;
+import driver.bookstore.Book.BookRepository;
+import driver.bookstore.Publisher.Publisher;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 //import model.Datasource;
 //import model.Product;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
@@ -20,18 +29,79 @@ import java.util.regex.Pattern;
  * This class handles the admin products page.
  * @author      Sajmir Doko
  */
-public class BooksController {
+public class BooksController implements Initializable {
+    @FXML
+    private TableView<Book> bookTableView;
+    @FXML
+    private TableColumn<Book, String> sizeCol;
 
     @FXML
-    public TextField fieldProductsSearch;
+    private TableColumn<Book, String> titleCol;
+
     @FXML
-    public Text viewProductResponse;
+    private TableColumn<Book, Boolean> printColorCol;
+
     @FXML
-    public GridPane formEditProductView;
+    private TableColumn<Book, String> coverCol;
+
+    @FXML
+    private TableColumn<Book, Author> authorCol;
+
+
     @FXML
     private StackPane productsContent;
-//    @FXML
-//    private TableView<Book> tableProductsPage;
+
+    @FXML
+    private TableColumn<Book, List<String>> categoryCol;
+
+    @FXML
+    private Button addBook;
+
+    @FXML
+    private TableColumn<Book, Integer> pageNoCol;
+
+    @FXML
+    private TableColumn<Book, Integer> priceCol;
+
+    @FXML
+    private HBox categoriesBoxes;
+
+    @FXML
+    private TableColumn<Book, Integer> partNoCol;
+
+    @FXML
+    private TableColumn<Book, Publisher> publisherCol;
+
+    @FXML
+    private TextField fieldProductsSearch;
+
+    BookRepository repository;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("categories"));
+        partNoCol.setCellValueFactory(new PropertyValueFactory<>("partNo"));
+        pageNoCol.setCellValueFactory(new PropertyValueFactory<>("pageNo"));
+        sizeCol.setCellValueFactory(new PropertyValueFactory<>("size"));
+        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        printColorCol.setCellValueFactory(new PropertyValueFactory<>("paintColor"));
+        coverCol.setCellValueFactory(new PropertyValueFactory<>("cover"));
+        repository  = new BookRepository();
+        listBooks();
+    }
+    @FXML
+    void btnBooksSearchOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAddProductOnClick(ActionEvent event) {
+
+    }
+
 
     /**
      * This method lists all the product to the view table.
@@ -40,18 +110,8 @@ public class BooksController {
      */
     @FXML
     public void listBooks() {
-//
-//        Task<ObservableList<Product>> getAllProductsTask = new Task<ObservableList<Product>>() {
-//            @Override
-//            protected ObservableList<Product> call() {
-//                return FXCollections.observableArrayList(Datasource.getInstance().getAllProducts(Datasource.ORDER_BY_NONE));
-//            }
-//        };
-//
-//        tableProductsPage.itemsProperty().bind(getAllProductsTask.valueProperty());
-//        addActionButtonsToTable();
-//        new Thread(getAllProductsTask).start();
-
+        List<Book> books = repository.getAllBooks();
+        bookTableView.getItems().addAll(books);
     }
 
     /**
@@ -340,4 +400,6 @@ public class BooksController {
 
         return new TextFormatter<>(converter, 0, filter);
     }
+
+
 }

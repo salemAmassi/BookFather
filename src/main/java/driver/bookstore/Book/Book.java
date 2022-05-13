@@ -60,9 +60,9 @@ public class Book implements Entity{
     @Column(name = "size",  length = 15)
      String size;
     @Column(name = "pageNo", length = 4)
-     int pagNo;
+     int pageNo;
     @Column(name = "paintColor")
-     boolean paintColor;
+     String paintColor;
     @Column(name = "cover", length = 15)
     String cover;
     @Column(name = "isbn", length = 15)
@@ -117,4 +117,5 @@ public class Book implements Entity{
     public Class<? extends Annotation> annotationType() {
         return null;
     }
+
 }

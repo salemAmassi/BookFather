@@ -1,16 +1,12 @@
 package driver.bookstore.Controllers.Illus;
 
 import driver.bookstore.Controllers.Illus.products.BooksController;
-import driver.bookstore.FxStore;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
@@ -21,16 +17,16 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     @FXML
     private Button sellBookButton;
-    @FXML
-    private Button searchButton;
+//    @FXML
+//    private Button searchButton;
     @FXML
     private Button addBookButton;
-    @FXML
-    private TextField searchField;
-    @FXML
-    private ComboBox<String> searchCriteria;
-    @FXML
-    private FlowPane categoriesContainer;
+//    @FXML
+//    private TextField searchField;
+//    @FXML
+//    private ComboBox<String> searchCriteria;
+//    @FXML
+//    private FlowPane categoriesContainer;
     @FXML
     public Button btnHome;
     @FXML
@@ -43,7 +39,7 @@ public class DashboardController implements Initializable {
     private StackPane dashContent;
 
     public void btnHomeOnClick(ActionEvent actionEvent) {
-        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/main-dashboard.fxml");
+        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/home.fxml");
         DashboardController homeController = fxmlLoader.getController();
 //        homeController.getDashboardProdCount();
 //        homeController.getDashboardCostCount();
@@ -83,15 +79,16 @@ public class DashboardController implements Initializable {
     private FXMLLoader loadFxmlPage(String view_path) {
         File file  = new File(view_path);
         FXMLLoader fxmlLoader = new FXMLLoader();
+        AnchorPane root = null;
         try {
-          fxmlLoader.load(file.toURI().toURL());
+            root = fxmlLoader.load(file.toURI().toURL());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StackPane root = fxmlLoader.getRoot();
-//        dashContent.getChildren().clear();
-        dashContent = root;
+        dashContent.getChildren().clear();
+        dashContent.getChildren().add(root);
 //        FxStore.primaryStage.setTitle(dashboard.getName());
+        System.out.println(file.getName());
         return fxmlLoader;
     }
 

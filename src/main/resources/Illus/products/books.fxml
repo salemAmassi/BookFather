@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Illus.products.BooksController">
+
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Illus.products.BooksController">
    <children>
       <StackPane fx:id="productsContent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,7 +19,7 @@
                  <top>
                   <VBox prefHeight="84.0" prefWidth="1220.0">
                      <children>
-                           <GridPane alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
+                           <GridPane alignment="CENTER_RIGHT" hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER_RIGHT">
                                <columnConstraints>
                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,47 +38,49 @@
                                     <ComboBox layoutX="400.0" layoutY="5.0" prefHeight="26.0" prefWidth="173.0" />
                                      </children>
                                   </AnchorPane>
-                                   <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAddProductOnClick" prefHeight="26.0" styleClass="button, success, sm" text="Add New Book" textAlignment="RIGHT" GridPane.columnIndex="1" />
+                                   <Button fx:id="addBook" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAddProductOnClick" prefHeight="26.0" styleClass="button, success, sm" text="Add New Book" textAlignment="RIGHT" GridPane.columnIndex="1" />
                               </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
+                           </padding>
                            </GridPane>
-                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <HBox fx:id="categoriesBoxes" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                  </top>
                  <center>
-                     <TableView fx:id="tableProductsPage" editable="true" prefHeight="663.0" prefWidth="1220.0" styleClass="table-view">
+                     <TableView fx:id="bookTableView" editable="true" prefHeight="663.0" prefWidth="1220.0" styleClass="table-view">
                          <columns>
-                             <TableColumn prefWidth="75.0" text="Title">
+                             <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title">
                                  <cellValueFactory>
                                      <PropertyValueFactory property="name" />
                                  </cellValueFactory>
                              </TableColumn>
-                             <TableColumn prefWidth="75.0" text="Author">
+                             <TableColumn fx:id="authorCol" prefWidth="75.0" text="Author">
                                  <cellValueFactory>
                                      <PropertyValueFactory property="price" />
                                  </cellValueFactory>
                              </TableColumn>
-                             <TableColumn prefWidth="125.0" text="Price">
+                             <TableColumn fx:id="priceCol" prefWidth="125.0" text="Price">
                                  <cellValueFactory>
                                      <PropertyValueFactory property="quantity" />
                                  </cellValueFactory>
                              </TableColumn>
-                             <TableColumn prefWidth="125.0" text="Category">
+                             <TableColumn fx:id="categoryCol" prefWidth="125.0" text="Category">
                                  <cellValueFactory>
                                      <PropertyValueFactory property="category_name" />
                                  </cellValueFactory>
                              </TableColumn>
-                             <TableColumn prefWidth="196.0" text="Part No.">
+                             <TableColumn fx:id="partNoCol" prefWidth="196.0" text="Part No.">
                                  <cellValueFactory>
                                      <PropertyValueFactory property="nr_sales" />
                                  </cellValueFactory>
                              </TableColumn>
-                        <TableColumn prefWidth="50.0" text="Size" />
-                        <TableColumn prefWidth="146.0" text="Page No." />
-                        <TableColumn prefWidth="75.0" text="Publisher" />
-                        <TableColumn prefWidth="149.0" text="Print Color" />
-                        <TableColumn prefWidth="72.0" text="Cover" />
-                        <TableColumn prefWidth="89.0" text="Source" />
+                        <TableColumn fx:id="sizeCol" prefWidth="50.0" text="Size" />
+                        <TableColumn fx:id="pageNoCol" prefWidth="146.0" text="Page No." />
+                        <TableColumn fx:id="publisherCol" prefWidth="75.0" text="Publisher" />
+                        <TableColumn fx:id="printColorCol" prefWidth="149.0" text="Print Color" />
+                        <TableColumn fx:id="coverCol" prefWidth="72.0" text="Cover" />
                          </columns>
                          <columnResizePolicy>
                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

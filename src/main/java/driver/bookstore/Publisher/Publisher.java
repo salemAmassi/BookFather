@@ -24,4 +24,8 @@ public class Publisher {
 //    @OneToMany(mappedBy = "publisher",cascade = CascadeType.ALL)
 //    private List<Book> books;
 
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

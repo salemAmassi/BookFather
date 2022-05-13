@@ -68,7 +68,9 @@
                <TextField fx:id="fieldAddBookLocation" layoutX="114.0" layoutY="190.0" promptText="Location in Library" GridPane.columnIndex="4" GridPane.rowIndex="6" />
 
                     <Text fx:id="viewProductResponse" fill="#22a424" strokeType="OUTSIDE" strokeWidth="0.0" text="Book added!" visible="false" BorderPane.alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                    <Button mnemonicParsing="false" onAction="#btnAddBookOnAction" styleClass="button, success" text="Add Book" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+                    <Button mnemonicParsing="false" onAction="#btnAddBookOnAction"
+                            styleClass="button, success" text="Add Book" GridPane.columnIndex="4"
+                            GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
                 </GridPane>
             </center>
             <top>

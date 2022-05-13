@@ -27,12 +27,12 @@ public class BookRepository implements Repository {
         toUpdateBook.setName(temp.getName());
 //        toUpdateBook.setAuthors(temp.getAuthors());
 //        toUpdateBook.setCategories(temp.getCategories());
-        toUpdateBook.setPagNo(temp.getPagNo());
+        toUpdateBook.setPageNo(temp.getPageNo());
         toUpdateBook.setPrice(temp.getPrice());
         toUpdateBook.setCover(temp.getCover());
         toUpdateBook.setIsbn(temp.getIsbn());
         toUpdateBook.setLocation(temp.getLocation());
-        toUpdateBook.setPaintColor(temp.isPaintColor());
+        toUpdateBook.setPaintColor(temp.getPaintColor());
 //        toUpdateBook.setPublisher(temp.getPublisher());
         toUpdateBook.setQuantity(temp.getQuantity());
         temp.setPartNo(temp.getPartNo());
@@ -63,6 +63,10 @@ public List<Book> getBookByCategory(String categoryName){
 List<Book> books =  query.getResultList();
 return books;
 
+}
+
+public List<Book> getAllBooks(){
+        return  manager.createQuery("SELECT b from Book b",Book.class).getResultList();
 }
 public List<Book> getBookByCategories(ArrayList<String> categories){
     TypedQuery<Book> query = manager.createQuery("SELECT " +
