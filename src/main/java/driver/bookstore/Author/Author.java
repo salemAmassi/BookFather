@@ -2,6 +2,7 @@ package driver.bookstore.Author;
 
 import driver.bookstore.Book.Book;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @Table(name = "author")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -33,12 +33,12 @@
                               <children>
                                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                      <children>
-                                         <TextField fx:id="fieldProductsSearch" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="291.0" promptText="search by book name or description" />
-                                         <Button layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnBooksSearchOnAction" prefHeight="26.0" styleClass="button, info, sm" text="Search" />
-                                    <ComboBox layoutX="400.0" layoutY="5.0" prefHeight="26.0" prefWidth="173.0" />
+                                         <TextField fx:id="searchField" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="291.0" promptText="search by book name or description" />
+                                         <Button fx:id="searchButton" layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnBooksSearchOnAction" prefHeight="26.0" styleClass="button, info, sm" text="Search" />
+                                    <ComboBox fx:id="searchCriteria" layoutX="400.0" layoutY="5.0" prefHeight="26.0" prefWidth="173.0" />
                                      </children>
                                   </AnchorPane>
-                                   <Button fx:id="addBook" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAddProductOnClick" prefHeight="26.0" styleClass="button, success, sm" text="Add New Book" textAlignment="RIGHT" GridPane.columnIndex="1" />
+                                   <Button fx:id="addBook" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAddBookOnClick" prefHeight="26.0" styleClass="button, success, sm" text="Add New Book" textAlignment="RIGHT" GridPane.columnIndex="1" />
                               </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />

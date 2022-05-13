@@ -838,7 +838,6 @@ VBox > .split-menu-button.last > .arrow-button {
 	-fx-padding:0;
 	-fx-border-color: #56c0e0;
 	-fx-border-radius: 3;
-	-fx-background-color: white;
 }
 .check-box > .box > .mark {
 	-fx-background-color: null;
@@ -927,4 +926,10 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 .slider:vertical .track {
 	-fx-pref-width: 5;
+}
+.figure{
+	-fx-border-radius: 30;
+	-fx-background-radius: 30;
+	-fx-end-margin: 20;
+	-fx-start-margin: 20;
 }

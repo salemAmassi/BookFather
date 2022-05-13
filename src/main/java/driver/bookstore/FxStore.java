@@ -13,7 +13,7 @@ import java.io.IOException;
  * Our main driver of the project
  * */
 public class FxStore extends Application {
-    public static Stage primaryStage;
+    public static Stage primaryStage = new Stage();
     @Override
     public void start(Stage stage) throws IOException {
         File dashboard  = new File("src/main/resources/Illus/main-dashboard.fxml");

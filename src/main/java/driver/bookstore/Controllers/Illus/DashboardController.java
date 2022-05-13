@@ -1,6 +1,7 @@
 package driver.bookstore.Controllers.Illus;
 
 import driver.bookstore.Controllers.Illus.products.BooksController;
+import driver.bookstore.FxStore;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +38,10 @@ public class DashboardController implements Initializable {
     public AnchorPane dashHead;
     @FXML
     private StackPane dashContent;
-
+    private static StackPane dashStackPane ;
+public static  StackPane getDashContent(){
+    return dashStackPane;
+}
     public void btnHomeOnClick(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/home.fxml");
         DashboardController homeController = fxmlLoader.getController();
@@ -87,8 +91,8 @@ public class DashboardController implements Initializable {
         }
         dashContent.getChildren().clear();
         dashContent.getChildren().add(root);
-//        FxStore.primaryStage.setTitle(dashboard.getName());
-        System.out.println(file.getName());
+        FxStore.primaryStage.setTitle(file.getName().substring(0,file.getName().lastIndexOf(".")));
+        dashStackPane = dashContent;
         return fxmlLoader;
     }
 

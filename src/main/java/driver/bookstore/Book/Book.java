@@ -22,28 +22,6 @@ import java.util.List;
 @Builder
 @ToString
 @Table(name = "book")
-//@NamedQueries(
-//        {
-//                @NamedQuery(name = "Book.findAll", query = "SELECT b from Book b"),
-//                @NamedQuery(name = "Book.findByCategory",
-//                        query = "SELECT b " +
-//                                "from Book b join b.categories Category c " +
-//                                " where c.name = :categoryName")
-//        })
-//        @NamedNativeQueries(
-//                @NamedNativeQuery(name = "Book.findByCategory",
-//                        query = "SELECT b.name FROM book b " +
-//                                "WHERE b.id EXISTS(" +
-//                                "    SELECT bc.book_id " +
-//                                "    FROM" +
-//                                "        book_category bc" +
-//                                "    JOIN category c ON" +
-//                                "        bc.category_id = c.ID" +
-//                                "    WHERE\n" +
-//                                "        c.name = ?categoryName;\n" +
-//                                "); ")
-//        )
-
 public class Book implements Entity{
     //TODO: CREATE ALL QUERIES FOR BOOK, CATEGORY.
     @Id @Column(name = "id", nullable = false)
@@ -72,17 +50,12 @@ public class Book implements Entity{
     @Column(name = "location", length = 3)
      int location;
 
-//
-//    @JoinTable(
-//            name = "book_author",
-//            joinColumns = @JoinColumn(name = "book_id"),
-//            inverseJoinColumns = @JoinColumn(name = "author_id")
-//    )
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private Author author;
 //
 //    //needs work!
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Publisher publisher;
 
     @JoinTable(
@@ -90,7 +63,7 @@ public class Book implements Entity{
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
         private List<Category> categories;
 
     @Override

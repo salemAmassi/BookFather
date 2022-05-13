@@ -1,12 +1,14 @@
 package driver.bookstore.Publisher;
 import driver.bookstore.Book.Book;
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.List;
 
 /**Publisher Entity*/
 @Entity
 @Table(name = "publisher")
-
+@Getter
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
