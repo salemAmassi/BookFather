@@ -1,4 +1,4 @@
-package driver.bookstore.Controllers.Illus.products;
+package driver.bookstore.Controllers.Books;
 
 import driver.bookstore.Author.Author;
 import driver.bookstore.Author.AuthorRepository;
@@ -14,10 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 
-import javax.swing.text.html.Option;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 

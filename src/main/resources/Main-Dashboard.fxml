@@ -14,8 +14,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" stylesheets="@resources/css/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="driver.bookstore.Controllers.Illus.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" stylesheets="@CSS/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="driver.bookstore.Controllers.DashboardController">
     <StackPane layoutY="-9.0" prefHeight="800.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
@@ -24,7 +24,7 @@
                         <Button fx:id="btnHome" contentDisplay="TOP" layoutY="13.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Home" />
                         <Button fx:id="btnProducts" contentDisplay="TOP" layoutY="104.0" mnemonicParsing="false" onAction="#btnBooksOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Books" />
                         <Button fx:id="addBookButton" contentDisplay="TOP" layoutY="287.0" mnemonicParsing="false" onAction="#btnAddOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Add Book" />
-                        <Button fx:id="sellBookButton" contentDisplay="TOP" layoutY="196.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Sell Book" />
+                        <Button fx:id="sellBookButton" contentDisplay="TOP" layoutY="196.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Sell Book" />
 <!--                        <Button fx:id="btnSettings" contentDisplay="TOP" layoutY="376.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Settings" />-->
                     </AnchorPane>
                 </AnchorPane>
@@ -53,7 +53,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                             <ImageView fitHeight="50.0" fitWidth="120.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@resources/img/brand/sm-logo-admin.png" />
+                                    <Image url="@Brand/sm-logo-admin.png" />
                                 </image>
                                 <HBox.margin>
                                     <Insets left="10.0" />

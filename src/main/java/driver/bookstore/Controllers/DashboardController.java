@@ -1,6 +1,6 @@
-package driver.bookstore.Controllers.Illus;
+package driver.bookstore.Controllers;
 
-import driver.bookstore.Controllers.Illus.products.BooksController;
+import driver.bookstore.Controllers.Books.BooksController;
 import driver.bookstore.FxStore;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,25 +43,22 @@ public static  StackPane getDashContent(){
     return dashStackPane;
 }
     public void btnHomeOnClick(ActionEvent actionEvent) {
-        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/home.fxml");
+        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Home.fxml");
         DashboardController homeController = fxmlLoader.getController();
 //        homeController.getDashboardProdCount();
 //        homeController.getDashboardCostCount();
     }
 
     public void btnBooksOnClick(ActionEvent actionEvent) {
-        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/products/books.fxml");
+        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/Books.fxml");
         BooksController controller = fxmlLoader.getController();
 //        controller.listBooks();
     }
     public void btnAddOnClick(ActionEvent event){
-        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/products/add-book.fxml");
+        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/AddBook.fxml");
         BooksController controller = fxmlLoader.getController();
     }
-    public void btnSellOnClick(ActionEvent event){
-        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/SellBook.fxml");
-        BooksController controller = fxmlLoader.getController();
-    }
+
 //    public void btnOrdersOnClick(ActionEvent actionEvent) {
 //        FXMLLoader fxmlLoader = loadFxmlPage("/view/admin/pages/orders/orders.fxml");
 ////        OrdersController orders = fxmlLoader.getController();
@@ -101,8 +98,8 @@ public static  StackPane getDashContent(){
 //        TODO: Move two lines to books view
 //        CategoryComponentFactory factory= new CategoryComponentFactory();
 //        categoriesContainer.getChildren().add(factory.createCategoryHBox("سياسة"));
-        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/home.fxml");
-        driver.bookstore.Controllers.Illus.HomeController homeController = fxmlLoader.getController();
+        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Home.fxml");
+        HomeController homeController = fxmlLoader.getController();
 //        homeController.getDashboardProdCount();
 //        homeController.getDashboardCostCount();
     }

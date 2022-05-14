@@ -1,4 +1,4 @@
-package driver.bookstore.Controllers.Illus;
+package driver.bookstore.Controllers;
 
 import driver.bookstore.Author.Author;
 import driver.bookstore.Book.Book;

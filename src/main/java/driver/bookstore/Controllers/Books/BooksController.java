@@ -1,10 +1,10 @@
-package driver.bookstore.Controllers.Illus.products;
+package driver.bookstore.Controllers.Books;
 
 import driver.bookstore.Author.Author;
 import driver.bookstore.Book.Book;
 import driver.bookstore.Book.BookRepository;
-import driver.bookstore.Controllers.Illus.DashboardController;
-import driver.bookstore.Controllers.Illus.SearchController;
+import driver.bookstore.Controllers.DashboardController;
+import driver.bookstore.Controllers.SearchController;
 import driver.bookstore.FxStore;
 import driver.bookstore.Publisher.Publisher;
 import javafx.event.ActionEvent;
@@ -100,7 +100,7 @@ public class BooksController implements Initializable {
     @FXML
     void btnAddBookOnClick(ActionEvent event) {
         StackPane dashContent = DashboardController.getDashContent();
-        File file  = new File("src/main/resources/Illus/products/add-book.fxml");
+        File file  = new File("src/main/resources/Illus/products/AddBook.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
         AnchorPane root = null;
         try {
@@ -239,7 +239,7 @@ public class BooksController implements Initializable {
 //    private void btnAddBookOnClick() {
 //        FXMLLoader fxmlLoader = new FXMLLoader();
 //        try {
-//            fxmlLoader.load(getClass().getResource("/view/admin/pages/products/add-book.fxml").openStream());
+//            fxmlLoader.load(getClass().getResource("/view/admin/pages/products/AddBook.fxml").openStream());
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -259,7 +259,7 @@ public class BooksController implements Initializable {
 //    private void btnEditBook(int book_id) {
 //        FXMLLoader fxmlLoader = new FXMLLoader();
 //        try {
-//            fxmlLoader.load(getClass().getResource("/view/admin/pages/products/edit-book.fxml").openStream());
+//            fxmlLoader.load(getClass().getResource("/view/admin/pages/products/EditBook.fxml").openStream());
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -282,7 +282,7 @@ public class BooksController implements Initializable {
 //    private void btnViewBook(int book_id) {
 //        FXMLLoader fxmlLoader = new FXMLLoader();
 //        try {
-//            fxmlLoader.load(getClass().getResource("/view/admin/pages/products/view-book.fxml").openStream());
+//            fxmlLoader.load(getClass().getResource("/view/admin/pages/products/ViewBook.fxml").openStream());
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
