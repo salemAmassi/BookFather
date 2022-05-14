@@ -51,7 +51,7 @@ public class BooksController implements Initializable {
     private ComboBox<String> searchCriteria;
 
     BookRepository repository;
-
+    public Book selectedBook;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -60,8 +60,16 @@ public class BooksController implements Initializable {
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("categories"));
         publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         repository  = new BookRepository();
+        selectedBook = new Book();
         searchCriteria.getItems().addAll("Title","Author","Price");
         searchCriteria.getSelectionModel().selectFirst();
+        bookTableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+            selectedBook = repository.findEntity(newValue.getName());
+            }
+
+            });
+
         listBooks();
     }
     @FXML
@@ -189,7 +197,7 @@ public class BooksController implements Initializable {
         dashContent.getChildren().add(root);
 
         ViewBookController controller = fxmlLoader.getController();
-        controller.fillViewingBookFields(product_id);
+        controller.fillViewingBookFields();
     }
 
     //TODO: Use text formatters (double and integer)
@@ -245,7 +253,7 @@ public class BooksController implements Initializable {
                                 System.out.println("book id: " + bookData.getId());
                                 System.out.println("book name: " + bookData.getName());
                                 // TODO: fix delete operation
-                                repository.deleteEntity(repository.findEntity((long) bookData.getId()));
+                                repository.deleteEntity(repository.findEntity(bookData.getId()));
                                 getTableView().getItems().remove(getIndex());
                             }
                         });

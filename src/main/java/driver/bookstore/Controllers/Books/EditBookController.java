@@ -73,7 +73,7 @@ public class EditBookController extends BooksController {
 //
 //            addProductTask.setOnSucceeded(e -> {
 //                if (addProductTask.valueProperty().get()) {
-//                    viewProductResponse.setVisible(true);
+//                    viewBookResponse.setVisible(true);
 //                    System.out.println("Product edited!");
 //                }
 //            });
