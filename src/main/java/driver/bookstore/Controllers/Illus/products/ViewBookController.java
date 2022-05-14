@@ -43,6 +43,7 @@ public class ViewBookController extends BooksController {
      * @param product_id        Product id.
      * @since                   1.0.0
      */
+    //TODO: Fix viewing controller
     public void fillViewingBookFields(int product_id) {
 //        Task<ObservableList<Product>> fillProductTask = new Task<ObservableList<Product>>() {
 //            @Override
