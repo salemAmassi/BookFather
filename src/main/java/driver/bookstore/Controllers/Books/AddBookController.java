@@ -102,6 +102,8 @@ public class AddBookController implements Initializable {
             .location(getValue(fieldAddBookLocation.getText()))
             .build();
             bookRepository.addEntity(book);
+
+            viewProductResponse.setVisible(true);
         }
         private int getValue(String input){
             try{
