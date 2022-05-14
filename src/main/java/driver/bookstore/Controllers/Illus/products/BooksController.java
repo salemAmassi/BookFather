@@ -5,16 +5,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+<<<<<<< Updated upstream
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 //import model.Datasource;
 //import model.Product;
+=======
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
+>>>>>>> Stashed changes
 
 import java.io.IOException;
+<<<<<<< Updated upstream
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
+=======
+import java.net.URL;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+>>>>>>> Stashed changes
 
 /**
  * This class handles the admin products page.
@@ -25,6 +38,7 @@ public class BooksController {
     @FXML
     public TextField fieldProductsSearch;
     @FXML
+<<<<<<< Updated upstream
     public Text viewProductResponse;
     @FXML
     public GridPane formEditProductView;
@@ -204,6 +218,48 @@ public class BooksController {
         EditBookController controller = fxmlLoader.getController();
         controller.fillEditingBookFields(book_id);
 
+=======
+    private TableColumn<Book, String> titleCol;
+    @FXML
+    private TableColumn<Book, Author> authorCol;
+    @FXML
+    private StackPane productsContent;
+    @FXML
+    private TableColumn<Book, List<String>> categoryCol;
+    @FXML
+    private Button addBook;
+    @FXML
+    private TableColumn<Book, Integer> priceCol;
+    @FXML
+    private TableColumn<Book, Integer> partNoCol;
+    @FXML
+    private TableColumn<Book, Publisher> publisherCol;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private ComboBox<String> searchCriteria;
+    BookRepository repository;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("categories"));
+        partNoCol.setCellValueFactory(new PropertyValueFactory<>("partNo"));
+        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        repository  = new BookRepository();
+        searchCriteria.getItems().addAll("Title","Author","Price");
+        searchCriteria.getSelectionModel().selectFirst();
+        listBooks();
+    }
+    @FXML
+    void btnBooksSearchOnAction(ActionEvent event) {
+       bookTableView.getItems().setAll(new SearchController(repository)
+               .search(searchCriteria.getSelectionModel().getSelectedItem(),searchField.getText()));
+>>>>>>> Stashed changes
     }
 
     /**
@@ -220,6 +276,7 @@ public class BooksController {
             e.printStackTrace();
         }
 
+<<<<<<< Updated upstream
         AnchorPane root = fxmlLoader.getRoot();
         productsContent.getChildren().clear();
         productsContent.getChildren().add(root);
@@ -339,5 +396,196 @@ public class BooksController {
         };
 
         return new TextFormatter<>(converter, 0, filter);
+=======
+    @FXML
+    public void listBooks() {
+        List<Book> books = repository.getAllBooks();
+        bookTableView.getItems().addAll(books);
+        addActionButtonsToTable();
+    }
+
+    @FXML
+    private void btnEditBook(int book_id) {
+        StackPane dashContent = DashboardController.getDashContent();
+        File file  = new File("src/main/resources/Illus/products/edit-book.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        AnchorPane root = null;
+        try {
+            root = fxmlLoader.load(file.toURI().toURL());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dashContent.getChildren().clear();
+        dashContent.getChildren().add(root);
+
+        EditBookController controller = fxmlLoader.getController();
+        controller.fillEditingBookFields(book_id);
+
+    }
+
+    @FXML
+    private void btnViewProduct(int product_id) {
+        StackPane dashContent = DashboardController.getDashContent();
+        File file  = new File("src/main/resources/Illus/products/view-book.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        AnchorPane root = null;
+        try {
+            root = fxmlLoader.load(file.toURI().toURL());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dashContent.getChildren().clear();
+        dashContent.getChildren().add(root);
+
+        ViewBookController controller = fxmlLoader.getController();
+        controller.fillViewingBookFields(product_id);
+    }
+
+    // TODO: Use product Validation
+    boolean areProductInputsValid(String fieldAddBookTitle, String fieldAddBookIsbn, String fieldAddBookAuthor, String fieldAddBookPrice, String fieldAddBookPart, String fieldAddBookPages, String fieldAddBookPublisher, String fieldAddBookQuantity, String fieldAddBookLocation) {
+        // TODO
+        //  Better validate inputs.
+        String errorMessage = "";
+
+//        if (productCategoryId == 0) {
+//            errorMessage += "Not valid category id!\n";
+//        }// TODO: Validate Categories
+        if (fieldAddBookTitle == null || fieldAddBookTitle.length() < 3) {
+            errorMessage += "Please enter a valid title!\n";
+        }
+        // TODO: Properly Validate ISBN
+        if (fieldAddBookIsbn != null && fieldAddBookIsbn.length() < 5) {
+            errorMessage += "ISBN is not valid!\n";
+        }
+        if (fieldAddBookAuthor != null || fieldAddBookAuthor.length() < 3) {
+            errorMessage += "Please enter a valid author name!\n";
+        }
+        //TODO: Properly Validate Price
+//        if (fieldAddBookPrice) {
+//            errorMessage += "Price is not valid!\n";
+//        }
+        //TODO: Properly Validate Part
+//        if (fieldAddBookPart)) {
+//            errorMessage += "Not valid Part!\n";
+//        }
+        //TODO: Properly Validate Quantity
+//        if (fieldAddBookQuantity)) {
+//            errorMessage += "Not valid Quantity!\n";
+//        }
+        //TODO: Properly Validate Quantity
+//        if (fieldAddBookPages)) {
+//            errorMessage += "Not valid Page!\n";
+//        }
+        //TODO: Properly Validate Location
+//        if (fieldAddBookLocation)) {
+//            errorMessage += "Not valid Location!\n";
+//        }
+        if (fieldAddBookPublisher != null || fieldAddBookPublisher.length() < 3) {
+            errorMessage += "Please enter a valid publisher name!\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
+
+            alert.showAndWait();
+
+            return false;
+        }
+
+    }
+
+    //TODO: Use text formatters (double and integer)
+
+    @FXML
+    private void addActionButtonsToTable() {
+        TableColumn colBtnEdit = new TableColumn("Actions");
+
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
+            @Override
+            public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
+                return new TableCell<Book, Void>() {
+
+                    private final Button viewButton = new Button("View");
+
+                    {
+                        viewButton.getStyleClass().add("button");
+                        viewButton.getStyleClass().add("xs");
+                        viewButton.getStyleClass().add("info");
+                        viewButton.setOnAction((ActionEvent event) -> {
+                            Book bookData = getTableView().getItems().get(getIndex());
+                            btnViewProduct(bookData.getId());
+                        });
+                    }
+
+                    private final Button editButton = new Button("Edit");
+
+                    {
+                        editButton.getStyleClass().add("button");
+                        editButton.getStyleClass().add("xs");
+                        editButton.getStyleClass().add("primary");
+                        editButton.setOnAction((ActionEvent event) -> {
+                            Book bookData = getTableView().getItems().get(getIndex());
+                            btnEditBook(bookData.getId());
+                        });
+                    }
+
+                    private final Button deleteButton = new Button("Delete");
+
+                    {
+                        deleteButton.getStyleClass().add("button");
+                        deleteButton.getStyleClass().add("xs");
+                        deleteButton.getStyleClass().add("danger");
+                        deleteButton.setOnAction((ActionEvent event) -> {
+                            Book bookData = getTableView().getItems().get(getIndex());
+
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setHeaderText("Are you sure that you want to delete " + bookData.getName() + " ?");
+                            alert.setTitle("Delete " + bookData.getName() + " ?");
+                            Optional<ButtonType> deleteConfirmation = alert.showAndWait();
+
+                            if (deleteConfirmation.get() == ButtonType.OK) {
+                                System.out.println("Delete Product");
+                                System.out.println("book id: " + bookData.getId());
+                                System.out.println("book name: " + bookData.getName());
+                                // TODO: fix delete operation
+                                repository.deleteEntity(repository.findEntity((long) bookData.getId()));
+                                getTableView().getItems().remove(getIndex());
+                            }
+                        });
+                    }
+
+                    private final HBox buttonsPane = new HBox();
+
+                    {
+                        buttonsPane.setSpacing(10);
+                        buttonsPane.getChildren().add(viewButton);
+                        buttonsPane.getChildren().add(editButton);
+                        buttonsPane.getChildren().add(deleteButton);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(buttonsPane);
+                        }
+                    }
+                };
+            }
+        };
+
+        colBtnEdit.setCellFactory(cellFactory);
+
+        bookTableView.getColumns().add(colBtnEdit);
+
+>>>>>>> Stashed changes
     }
 }

@@ -55,6 +55,41 @@ public class AddBookController extends BooksController {
         if (category != null) {
             //cat_id = category.id();
         }
+<<<<<<< Updated upstream
+=======
+        String size = "B5";
+        System.out.println(fieldAddBookSize.getSelectionModel().getSelectedItem());
+        Author author = new Author(fieldAddBookAuthor.getText());
+        Publisher publisher = new Publisher(fieldAddBookPublisher.getText());
+        author = authorRepository.addEntity(author);
+        publisher = publisherRepository.addEntity(publisher);
+        Book book =
+                Book.builder()
+            .name(fieldAddBookTitle.getText())
+            .author(author)
+            .price(getValue(fieldAddBookPrice.getText()))
+            .pageNo(getValue(fieldAddBookPages.getText()))
+            .partNo(getValue(fieldAddBookPart.getText()))
+            .cover(fieldAddBookCover.getSelectionModel().getSelectedItem())
+            .paintColor(paintColor)//needs to set 0 and 1
+            .isbn(fieldAddBookIsbn.getText()) //isbn needs control
+            .size(fieldAddBookSize.getSelectionModel().getSelectedItem())
+            .categories(chosenCategories)
+            .publisher(publisher)
+            .location(getValue(fieldAddBookLocation.getText()))
+            .build();
+            bookRepository.addEntity(book);
+
+            viewProductResponse.setVisible(true);
+    }
+        private int getValue(String input){
+            try{
+                return Integer.parseInt(input);
+            }catch (NumberFormatException ex){
+                return 0;
+            }
+    }
+>>>>>>> Stashed changes
 
         assert category != null;
         //TODO: Fill validation with all items

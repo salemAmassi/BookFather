@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<<<<<<< Updated upstream
 
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Illus.products.BooksController">
    <StackPane fx:id="productsContent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -88,6 +89,91 @@
               </center>
               <bottom>
                   <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="1220.0" spacing="10.0" BorderPane.alignment="CENTER">
+=======
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Illus.products.BooksController">
+   <children>
+      <StackPane fx:id="productsContent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+   
+             <BorderPane prefHeight="521.0" prefWidth="743.0">
+                 <padding>
+                     <Insets left="30.0" right="30.0" />
+                 </padding>
+                 <top>
+                  <VBox prefHeight="84.0" prefWidth="1220.0">
+                     <children>
+                           <GridPane alignment="CENTER_RIGHT" hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER_RIGHT">
+                               <columnConstraints>
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                   <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                               </columnConstraints>
+                               <rowConstraints>
+                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               </rowConstraints>
+                               <BorderPane.margin>
+                                   <Insets top="20.0" />
+                               </BorderPane.margin>
+                              <children>
+                                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                     <children>
+                                         <TextField fx:id="searchField" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="291.0" promptText="search by book name or description" />
+                                         <Button fx:id="searchButton" layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnBooksSearchOnAction" prefHeight="26.0" styleClass="button, info, sm" text="Search" />
+                                    <ComboBox fx:id="searchCriteria" layoutX="400.0" layoutY="5.0" prefHeight="26.0" prefWidth="173.0" />
+                                     </children>
+                                  </AnchorPane>
+                                   <Button fx:id="addBook" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnAddBookOnClick" prefHeight="26.0" styleClass="button, success, sm" text="Add New Book" textAlignment="RIGHT" GridPane.columnIndex="1" />
+                              </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
+                           </padding>
+                           </GridPane>
+                        <HBox fx:id="categoriesBoxes" prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                 </top>
+                 <center>
+                     <TableView fx:id="bookTableView" editable="true" prefHeight="663.0" prefWidth="1220.0" styleClass="table-view">
+                         <columns>
+                             <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="name" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn fx:id="authorCol" prefWidth="75.0" text="Author">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="price" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn fx:id="priceCol" prefWidth="125.0" text="Price">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="quantity" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn fx:id="categoryCol" prefWidth="125.0" text="Category">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="category_name" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn fx:id="partNoCol" prefWidth="196.0" text="Part No.">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="nr_sales" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                        <TableColumn fx:id="publisherCol" prefWidth="75.0" text="Publisher" />
+                         </columns>
+                         <columnResizePolicy>
+                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                         </columnResizePolicy>
+                     <BorderPane.margin>
+                        <Insets top="10.0" />
+                     </BorderPane.margin>
+                     </TableView>
+                 </center>
+                 <bottom>
+                     <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="1220.0" spacing="10.0" BorderPane.alignment="CENTER">
+>>>>>>> Stashed changes
             </HBox>
               </bottom>
           </BorderPane>
