@@ -22,8 +22,9 @@ import java.util.List;
 @Builder
 @ToString
 @Table(name = "book")
+
 public class Book implements Entity{
-    //TODO: CREATE ALL QUERIES FOR BOOK, CATEGORY.
+    //TODO: CREATE ALL QUERIES FOR BOOK, CATEGORY. (make them static)
     @Id @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
      int id;

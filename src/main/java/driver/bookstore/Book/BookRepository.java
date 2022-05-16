@@ -45,6 +45,7 @@ public class BookRepository implements Repository {
         Book book= ((Book) entity);
         manager.getTransaction().begin();
         manager.remove(findEntity( book.getId()));
+        manager.getTransaction().commit();
     }
 
     @Override
