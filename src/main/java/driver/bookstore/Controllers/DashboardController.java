@@ -30,31 +30,41 @@ public class DashboardController implements Initializable {
     @FXML
     private StackPane dashContent;
     private static StackPane dashStackPane ;
+
     public static  StackPane getDashContent(){
-    return dashStackPane;
-}
+        return dashStackPane;
+    }
+
     public static void setDashStackPane(StackPane pane){
-    dashStackPane = pane;
-}
+        dashStackPane = pane;
+    }
+
+    // Assigns button to fxml page and loads respective controller
     public void btnHomeOnClick(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Home.fxml");
         DashboardController homeController = fxmlLoader.getController();
     }
 
+    // Assigns button to fxml page and loads respective controller
     public void btnBooksOnClick(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/Books.fxml");
         BooksController controller = fxmlLoader.getController();
     }
+
+    // Assigns button to fxml page and loads respective controller
     public void btnAddOnClick(ActionEvent event){
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/AddBook.fxml");
         BooksController controller = fxmlLoader.getController();
     }
+
+    // Assigns button to fxml page and loads respective controller
     @FXML
     void btnSellOnClick(ActionEvent event) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/SellBook.fxml");
         SellBookController controller = fxmlLoader.getController();
     }
 
+    // Loads fxml page directly onto main dashboard
     private FXMLLoader loadFxmlPage(String view_path) {
         File file  = new File(view_path);
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -71,6 +81,7 @@ public class DashboardController implements Initializable {
         return fxmlLoader;
     }
 
+    // Displays home page by default
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Home.fxml");

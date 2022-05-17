@@ -20,28 +20,22 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
+// TODO: Rework sell controller and UI
 public class SellBookController implements Initializable {
     @FXML
     private TableView<OrderedBook> purchasedBooksList;
-
     @FXML
     private Button deleteButton;
-
     @FXML
     private Button confirmSell;
-
     @FXML
     private TableView<Book> booksTable;
-
     @FXML
     private TableColumn<Book, Integer> quantityCol;
-
     @FXML
     private Button addBook;
-
     @FXML
     private TableColumn<Book, String> bNameCol;
-
     @FXML
     private TableColumn<Book, Author> authCol;
     @FXML
@@ -51,7 +45,7 @@ public class SellBookController implements Initializable {
     @FXML
     private Text totalField;
     @FXML
-    private TableColumn<Book, String > purchaseTitleCol;
+    private TableColumn<Book, String> purchaseTitleCol;
     @FXML
     private TableColumn<Book, Integer> purchaseQuantityCol;
     @FXML
@@ -65,34 +59,36 @@ public class SellBookController implements Initializable {
     @FXML
     void addBookHandle(ActionEvent event) {
         int quantity = AddBookController.getValue(quantityField.getText());
-     OrderedBook book = new OrderedBook();
- if(quantity>selectedBook.getQuantity()){
-     Alert alert = new Alert(Alert.AlertType.ERROR);
-     alert.setContentText("There is no enough quantity!");
-     alert.show();
-     quantityField.setText("");
- }else{
-     book.setName(selectedBook.getName());
-     book.setId(selectedBook.getId());
-     book.setPrice(selectedBook.getPrice());
-    book.setQuantity(quantity);
-    books.add(book);
- }
-    purchasedBooksList.getItems().setAll(books);
- int total = AddBookController.getValue(totalField.getText());
-    totalField.setText(total+book.getTotal()+"");
+        OrderedBook book = new OrderedBook();
+        if (quantity > selectedBook.getQuantity()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("There is not enough quantity!");
+            alert.show();
+            quantityField.setText("");
+        } else {
+            book.setName(selectedBook.getName());
+            book.setId(selectedBook.getId());
+            book.setPrice(selectedBook.getPrice());
+            book.setQuantity(quantity);
+            books.add(book);
+        }
+        purchasedBooksList.getItems().setAll(books);
+        int total = AddBookController.getValue(totalField.getText());
+        totalField.setText(total + book.getTotal() + "");
     }
+
     @FXML
-    public void deleteButtonHandle(ActionEvent event){
+    public void deleteButtonHandle(ActionEvent event) {
         purchasedBooksList.getItems().remove(purchasedBooksList.getSelectionModel().getSelectedItem());
     }
-   @FXML
-   public void confirmSellHandle(ActionEvent event){
+
+    @FXML
+    public void confirmSellHandle(ActionEvent event) {
         Query updateQuantity = repository.manager
                 .createNativeQuery("update book set quantity = quantity - :toSellQuantity where id = :id");
         purchasedBooksList.getItems()
                 .stream()
-                .forEach(book-> {
+                .forEach(book -> {
                             updateQuantity
                                     .setParameter("toSellQuantity", book.getQuantity())
                                     .setParameter("id", book.getId())
@@ -101,10 +97,10 @@ public class SellBookController implements Initializable {
                                     .getLogger()
                                     .log(new LogRecord(Level.FINE,
                                             "update book set quantity = quantity - "
-                                                    +book.getQuantity()+"where id = "+book.getId()));
+                                                    + book.getQuantity() + "where id = " + book.getId()));
                         }
                 );// we want to decrease the
-   }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,7 +111,7 @@ public class SellBookController implements Initializable {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         booksTable.getItems().setAll(repository.getAllBooks());
-        CrudLogger.getInstance().getLogger().log(Level.FINE,"SELECT b from Book b");
+        CrudLogger.getInstance().getLogger().log(Level.FINE, "SELECT b from Book b");
         purchaseTitleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         purchasePriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         purchaseQuantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -127,9 +123,9 @@ public class SellBookController implements Initializable {
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         booksTable.getSelectionModel()
                 .selectedItemProperty().addListener(
-                event->
-                        selectedBook = booksTable.getSelectionModel().getSelectedItem()
-        );
+                        event ->
+                                selectedBook = booksTable.getSelectionModel().getSelectedItem()
+                );
     }
 
 }

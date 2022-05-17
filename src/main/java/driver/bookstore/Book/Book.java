@@ -8,10 +8,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.lang.annotation.Annotation;
 import java.util.List;
-//                    "(Book b left join book_category on Book.id = book_category.bookId) " +
-//            @NamedQuery(name = "Book.findByAuthor",
-//            query = "SELECT b from Book b " +
-//                    "where b.AuthorId"
 
 /**Book Entity*/
 @Entity
@@ -25,37 +21,34 @@ import java.util.List;
 
 public class Book implements Entity{
     //TODO: CREATE ALL QUERIES FOR BOOK, CATEGORY. (make them static)
+
+    // 13 Columns
     @Id @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-     int id;
+    int id;
     @Column(name = "name", nullable = false, length = 200,  unique=true)
-     String name;
-
+    String name;
     @Column(name = "price", nullable = false, length = 3)
-     int price;
-
+    int price;
     @Column(name = "partNo", length = 3)
-     int partNo;
+    int partNo;
     @Column(name = "size",  length = 15)
-     String size;
+    String size;
     @Column(name = "pageNo", length = 4)
-     int pageNo;
+    int pageNo;
     @Column(name = "paintColor")
-     String paintColor;
+    String paintColor;
     @Column(name = "cover", length = 15)
     String cover;
     @Column(name = "isbn", length = 15)
-     String isbn;
+    String isbn;
     @Column(name = "quantity", length = 3)
-     int quantity;
+    int quantity;
     @Column(name = "location", length = 3)
-     int location;
-
-
+    int location;
     @ManyToOne
     private Author author;
-//
-//    //needs work!
+    //needs work!
     @ManyToOne
     private Publisher publisher;
 
@@ -65,7 +58,7 @@ public class Book implements Entity{
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     @ManyToMany()
-        private List<Category> categories;
+    private List<Category> categories;
 
     @Override
     public String name() {

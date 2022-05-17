@@ -19,9 +19,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-//import model.Categories;
-//import model.Datasource;
-//import model.Product;
 
 /**
  * {@inheritDoc}
@@ -32,31 +29,22 @@ public class EditBookController implements Initializable {
     private ComboBox<String> coverEditField;
     @FXML
     private TextField isbnEditField;
-
     @FXML
     private TextField locationEditField;
-
     @FXML
     private TextField partEditField;
-
     @FXML
     private TextField publisherEditField;
-
     @FXML
     private TextField nameEditField;
-
     @FXML
     private ComboBox<String> sizeEditField;
-
     @FXML
     private Text viewBookResponse;
-
     @FXML
     private TextField pageEditField;
-
     @FXML
     private TextField authorEditField;
-
     @FXML
     private TextField quantityEditField;
     @FXML
@@ -87,7 +75,7 @@ public class EditBookController implements Initializable {
         fillEditingBookFields();
     }
 
-private void getSelectedCategories(){
+    private void getSelectedCategories(){
     //creates checkboxes:
     List<Category> categories =
             new CategoryRepository()
@@ -113,41 +101,54 @@ private void getSelectedCategories(){
                     checkbox->selectedCategories.contains(((CheckBox) checkbox).getText()))
             .forEach(checkbox->((CheckBox)checkbox).setSelected(true));
 }
+
     @FXML
     void btnEditBookOnAction(ActionEvent event) {
-       List<Category> chosenCategories = fieldEditBookCategory.getChildren()
+        // Creates list with selected checkboxes representing categories
+        List<Category> chosenCategories = fieldEditBookCategory.getChildren()
                .stream().filter(checkbox->((CheckBox)checkbox).isSelected())
                .map(checkbox->(new Category(((CheckBox) checkbox).getText()))).collect(Collectors.toList());
-        String paintColor = "0";
-        if(colors.getSelectedToggle() == coloredChoice){
-            paintColor = "1";
-        }else if(colors.getSelectedToggle() == bwChoice){
-            paintColor = "0";
-        }
-        Author author = new Author(authorEditField.getText());
-        Publisher publisher = new Publisher(publisherEditField.getText());
-        author = authorRepository.addEntity(author);
-        publisher = publisherRepository.addEntity(publisher);
         List<Category> categories = chosenCategories.stream()
                 .map(category -> categoryRepository.addEntity(category)).collect(Collectors.toList());
+
+        // Extracts printColor from toggle group to either 0 or 1
+        String paintColor = "0";
+        if(colors.getSelectedToggle() == coloredChoice){
+               paintColor = "1";
+           }else if(colors.getSelectedToggle() == bwChoice){
+               paintColor = "0";
+           }
+
+        // Creates author entity if no author with inserted name exists yet
+        Author author = new Author(authorEditField.getText());
+        author = authorRepository.addEntity(author);
+
+        // Creates publisher entity if no author with inserted name exists yet
+        Publisher publisher = new Publisher(publisherEditField.getText());
+        publisher = publisherRepository.addEntity(publisher);
+
+        // Builds book entity with inserted values
+        // 13 Columns
         Book book =
                 Book.builder()
-                        .name(nameEditField.getText())
-                        .author(author)
-                        .price(getValue(priceEditField.getText()))
-                        .pageNo(getValue(pageEditField.getText()))
-                        .partNo(getValue(partEditField.getText()))
-                        .cover(coverEditField.getSelectionModel().getSelectedItem())
-                        .paintColor(paintColor)
-                        .isbn(isbnEditField.getText())
-                        .size(sizeEditField.getSelectionModel().getSelectedItem())
-                        .categories(categories)
-                        .publisher(publisher)
-                        .location(getValue(locationEditField.getText()))
+                        .name(nameEditField.getText())                                   //1
+                        .author(author)                                                  //2
+                        .price(getValue(priceEditField.getText()))                       //3
+                        .pageNo(getValue(pageEditField.getText()))                       //4
+                        .partNo(getValue(partEditField.getText()))                       //5
+                        .cover(coverEditField.getSelectionModel().getSelectedItem())     //6
+                        .paintColor(paintColor)                                          //7
+                        .isbn(isbnEditField.getText())                                   //8
+                        .size(sizeEditField.getSelectionModel().getSelectedItem())       //9
+                        .categories(categories)                                          //10
+                        .publisher(publisher)                                            //11
+                        .location(getValue(locationEditField.getText()))                 //12
+                        .quantity(getValue(quantityEditField.getText()))         //13
                         .build();
-        bookRepository.updateEntity(book);
-        viewBookResponse.setVisible(true);
+        bookRepository.updateEntity(book);  // Updates entity with new entity values
+        viewBookResponse.setVisible(true);  // Notify interface with success
     }
+
     private int getValue(String input){
         try{
             return Integer.parseInt(input);
@@ -155,65 +156,29 @@ private void getSelectedCategories(){
             return 0;
         }
     }
-    @FXML
-    private void btnEditBookOnAction() {
-//        Categories category = fieldEditProductCategoryId.getSelectionModel().getSelectedItem();
-//        int cat_id = 0;
-//        if (category != null) {
-//            cat_id = category.getId();
-//        }
-//
-//        assert category != null;
-//        if (areProductInputsValid(fieldEditProductName.getText(), fieldEditProductDescription.getText(), fieldEditProductPrice.getText(), fieldEditProductQuantity.getText(), cat_id)) {
-//
-//            int productId = Integer.parseInt(fieldEditProductId.getText());
-//            String productName = fieldEditProductName.getText();
-//            String productDescription = fieldEditProductDescription.getText();
-//            double productPrice = Double.parseDouble(fieldEditProductPrice.getText());
-//            int productQuantity = Integer.parseInt(fieldEditProductQuantity.getText());
-//            int productCategoryId = category.getId();
-//
-//            Task<Boolean> addProductTask = new Task<Boolean>() {
-//                @Override
-//                protected Boolean call() {
-//                    return Datasource.getInstance().updateOneProduct(productId, productName, productDescription, productPrice, productQuantity, productCategoryId);
-//                }
-//            };
-//
-//            addProductTask.setOnSucceeded(e -> {
-//                if (addProductTask.valueProperty().get()) {
-//                    viewBookResponse.setVisible(true);
-//                    System.out.println("Product edited!");
-//                }
-//            });
-//
-//            new Thread(addProductTask).start();
-//        }
-    }
 
+    // Fill fields with existing book values
     public void fillEditingBookFields() {
         sizeEditField.getItems().addAll("A4", "B5", "A5");
-        sizeEditField.getSelectionModel().select(selectedBook.getSize());
+        sizeEditField.getSelectionModel().select(selectedBook.getSize());               //1
         coverEditField.getItems().addAll("Thick", "normal");
-        coverEditField.getSelectionModel().select(selectedBook.getCover());
-        nameEditField.setText(selectedBook.getName());
-        authorEditField.setText(selectedBook.getAuthor().getName());
-        publisherEditField.setText(selectedBook.getPublisher().getName());
-        priceEditField.setText(selectedBook.getPrice()+"");
-        pageEditField.setText(selectedBook.getPageNo()+"");
-        partEditField.setText(selectedBook.getPartNo()+"");
-        quantityEditField.setText(selectedBook.getQuantity()+"");
-        locationEditField.setText(selectedBook.getLocation()+"");
-        isbnEditField.setText(selectedBook.getIsbn());
+        coverEditField.getSelectionModel().select(selectedBook.getCover());             //2
+        nameEditField.setText(selectedBook.getName());                                  //3
+        authorEditField.setText(selectedBook.getAuthor().getName());                    //4
+        publisherEditField.setText(selectedBook.getPublisher().getName());              //5
+        priceEditField.setText(selectedBook.getPrice()+"");                             //6
+        pageEditField.setText(selectedBook.getPageNo()+"");                             //7
+        partEditField.setText(selectedBook.getPartNo()+"");                             //8
+        quantityEditField.setText(selectedBook.getQuantity()+"");                       //9
+        locationEditField.setText(selectedBook.getLocation()+"");                       //10
+        isbnEditField.setText(selectedBook.getIsbn());                                  //11
         colors = new ToggleGroup();
         coloredChoice.setToggleGroup(colors);
-        bwChoice.setToggleGroup(colors);
+        bwChoice.setToggleGroup(colors);                                                //12
         if(selectedBook.getPaintColor().equalsIgnoreCase(bwChoice.getText()))
             bwChoice.setSelected(true);
         else
             coloredChoice.setSelected(true);
-        getSelectedCategories();
+        getSelectedCategories();                                                        //13
     }
-
-
 }

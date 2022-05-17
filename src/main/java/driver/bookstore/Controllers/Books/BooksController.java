@@ -52,49 +52,61 @@ public class BooksController implements Initializable {
 
     BookRepository repository;
     public static Book selectedBook;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Link columns with database
         titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("categories"));
         publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        repository  = new BookRepository();
+
+        // Create repositories and selector
+        repository = new BookRepository();
         selectedBook = new Book();
-        searchCriteria.getItems().addAll("Title","Author","Price");
+
+        // Fill search criteria
+        searchCriteria.getItems().addAll("Title", "Author", "Price");
         searchCriteria.getSelectionModel().selectFirst();
+
+        // Create listener for book selector
         bookTableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
-            selectedBook = repository.findEntity(newValue.getName());
+                selectedBook = repository.findEntity(newValue.getName());
             }
 
-            });
+        });
 
         listBooks();
     }
+
     @FXML
     void btnBooksSearchOnAction(ActionEvent event) {
-       bookTableView.getItems().setAll(new SearchController(repository)
-               .search(searchCriteria.getSelectionModel().getSelectedItem(),searchField.getText()));
+        // Refresh TableView with books returned from search operation
+        bookTableView.getItems().setAll(new SearchController(repository)
+                .search(searchCriteria.getSelectionModel().getSelectedItem(), searchField.getText()));
     }
 
     @FXML
     void btnAddBookOnClick(ActionEvent event) {
+        // Load AddBook page onto Main Dashboard
         StackPane dashContent = DashboardController.getDashContent();
-        File file  = new File("src/main/resources/Books/AddBook.fxml");
+        File file = new File("src/main/resources/Books/AddBook.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
+
         AnchorPane root = null;
         try {
             root = fxmlLoader.load(file.toURI().toURL());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         dashContent.getChildren().clear();
         dashContent.getChildren().add(root);
-        FxStore.primaryStage.setTitle(file.getName().substring(0,file.getName().lastIndexOf(".")));
+
+        FxStore.primaryStage.setTitle(file.getName().substring(0, file.getName().lastIndexOf(".")));
     }
-
-
 
     @FXML
     public void listBooks() {
@@ -104,7 +116,8 @@ public class BooksController implements Initializable {
     }
 
 
-
+    // Universal input validation class
+    // TODO: Implement in CRUD Controllers
     boolean areProductInputsValid(String fieldAddBookTitle, String fieldAddBookIsbn, String fieldAddBookAuthor, String fieldAddBookPrice, String fieldAddBookPart, String fieldAddBookPages, String fieldAddBookPublisher, String fieldAddBookQuantity, String fieldAddBookLocation) {
         // TODO
         //  Better validate inputs.
@@ -165,17 +178,21 @@ public class BooksController implements Initializable {
 
     @FXML
     private void btnEditBook() {
+        // Load EditBook page onto Main Dashboard
         StackPane dashContent = DashboardController.getDashContent();
-        File file  = new File("src/main/resources/Books/EditBook.fxml");
+        File file = new File("src/main/resources/Books/EditBook.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
+
         AnchorPane root = null;
         try {
             root = fxmlLoader.load(file.toURI().toURL());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         dashContent.getChildren().clear();
         dashContent.getChildren().add(root);
+
         EditBookController controller = new EditBookController();
         fxmlLoader.setController(controller);
 
@@ -183,30 +200,36 @@ public class BooksController implements Initializable {
 
     @FXML
     private void btnViewProduct() {
+        // Load ViewBook page onto Main Dashboard
         StackPane dashContent = DashboardController.getDashContent();
-        File file  = new File("src/main/resources/Books/ViewBook.fxml");
+        File file = new File("src/main/resources/Books/ViewBook.fxml");
+
         AnchorPane root = null;
-        FXMLLoader fxmlLoader =null;
+        FXMLLoader fxmlLoader = null;
         try {
             fxmlLoader = new FXMLLoader(file.toURI().toURL());
             root = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         dashContent.getChildren().clear();
         dashContent.getChildren().add(root);
+
         ViewBookController controller = new ViewBookController();
         fxmlLoader.setController(controller);
-//        controller.setSelectedBook(book);
-        FxStore.primaryStage.setTitle(file.getName().substring(0,file.getName().lastIndexOf(".")));
+//      controller.setSelectedBook(book);
+        FxStore.primaryStage.setTitle(file.getName().substring(0, file.getName().lastIndexOf(".")));
     }
 
     //TODO: Use text formatters (double and integer)
+
+    // Creates new column in TableView for action buttons
     @FXML
     private void addActionButtonsToTable() {
         TableColumn colBtnEdit = new TableColumn("Actions");
 
-        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
                 return new TableCell<Book, Void>() {
@@ -256,8 +279,8 @@ public class BooksController implements Initializable {
 //                                System.out.println("book name: " + bookData.getName());
                                 // TODO: fix delete operation
 
-                                   Alert msg = new Alert(Alert.AlertType.INFORMATION);
-                                   repository.deleteEntity(repository.findEntity(bookData.getName()));
+                                Alert msg = new Alert(Alert.AlertType.INFORMATION);
+                                repository.deleteEntity(repository.findEntity(bookData.getName()));
 //                               if( repository.findEntity(bookData.getName())==null){
 //                                msg.setContentText("Delete operation done successfully");
 //                               }else{

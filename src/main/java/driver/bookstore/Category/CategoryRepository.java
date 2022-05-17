@@ -1,9 +1,5 @@
 package driver.bookstore.Category;
 
-import driver.bookstore.Author.Author;
-import driver.bookstore.Book.Book;
-
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.util.List;
@@ -14,8 +10,10 @@ public class CategoryRepository {
 
    public CategoryRepository() {
         manager = Persistence.createEntityManagerFactory("book_unit").createEntityManager();
-    }
+   }
+
     public Category addEntity(Category entity) {
+        // If no category with inserted name exists yet, create new entity.
         if(findEntity(entity.getName()).size()==0){
             manager.getTransaction().begin();
             manager.persist(entity);//add
@@ -23,8 +21,10 @@ public class CategoryRepository {
             return entity;
         }
         else
+            // Otherwise, return existing category entity
             return  findEntity(entity.getName()).get(0);
     }
+
     public List<Category> findEntity(String name) {
         return  manager
                 .createQuery("SELECT c from Category c where c.name = :name")

@@ -19,18 +19,19 @@ public class HomeController implements Initializable {
     private Label categoriesCount;
     @FXML
     private Label authorsCount;
-
     @FXML
     private Label publishersCount;
-
     private BookRepository bookRepo;
     private CategoryRepository categoryRepo;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-         bookRepo = new BookRepository();
+        bookRepo = new BookRepository();
         categoryRepo = new CategoryRepository();
         getFigures();
     }
+
+    // Displays statistics about number of entities in database
     private void getFigures() {
         booksCount.setText(bookRepo.manager.createQuery("SELECT count(b.id) FROM Book b", Book.class).getResultList().get(0) + "");
         categoriesCount.setText(bookRepo.manager.createQuery("SELECT count(c.id) FROM Category c ", Category.class).getResultList().get(0) + "");

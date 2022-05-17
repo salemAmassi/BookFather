@@ -52,10 +52,8 @@ public class ViewBookController implements Initializable {
         fillViewingBookFields();
     }
 
-
+    // Display selected book values in text fields
     public void fillViewingBookFields() {
-
-
             fieldAddBookTitle.setText(selectedBook.getName());
             fieldAddBookQuantity.setText(selectedBook.getQuantity()+"");
             fieldAddBookPrice.setText(selectedBook.getPrice()+"");

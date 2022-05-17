@@ -1,9 +1,8 @@
 package driver.bookstore.Publisher;
+
 import driver.bookstore.Book.Book;
 import lombok.Getter;
-
 import javax.persistence.*;
-import java.util.List;
 
 /**Publisher Entity*/
 @Entity

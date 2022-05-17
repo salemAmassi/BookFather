@@ -17,7 +17,7 @@ public class FxStore extends Application {
     public static Stage primaryStage = new Stage();
     @Override
     public void start(Stage stage) throws IOException {
-        File dashboard  = new File("src/main/resources/Main-Dashboard.fxml");
+        File dashboard  = new File("src/main/resources/Main-Dashboard.fxml"); // Change path to start at a different fxml page
         Pane root = new FXMLLoader(dashboard.toURI().toURL()).load();
         Scene mainScene = new Scene(root);
         primaryStage = stage;

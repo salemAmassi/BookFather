@@ -14,6 +14,7 @@ public class BookRepository implements Repository {
     }
 
     @Override
+    // Find book entity by id
     public Book findEntity(int id) {
         return manager.find(Book.class,id);
     }
@@ -35,7 +36,7 @@ public class BookRepository implements Repository {
         toUpdateBook.setPaintColor(temp.getPaintColor());
         toUpdateBook.setPublisher(temp.getPublisher());
         toUpdateBook.setQuantity(temp.getQuantity());
-        temp.setPartNo(temp.getPartNo());
+        toUpdateBook.setPartNo(temp.getPartNo());
         manager.getTransaction().commit();
         return toUpdateBook;
     }
@@ -55,6 +56,7 @@ public class BookRepository implements Repository {
     manager.persist(entity);//add
     manager.getTransaction().commit();
     }
+
     //TODO: casting Object to Book
 //    public List<Book> getBookByCategory(String categoryName){
 //            TypedQuery<Book> query = manager.createQuery("SELECT " +
@@ -70,6 +72,7 @@ public class BookRepository implements Repository {
     public List<Book> getAllBooks(){
         return  manager.createQuery("SELECT b from Book b",Book.class).getResultList();
     }
+
     public List<Book> getBookByCategories(ArrayList<String> categories){
         TypedQuery<Book> query = manager.createQuery("SELECT " +
                 "   distinct b " +
@@ -78,6 +81,7 @@ public class BookRepository implements Repository {
                 " where c.name in :categories ",Book.class).setParameter("categories",categories);
         return query.getResultList();
     }
+
     @Override
     public void close() {
         manager.close();
@@ -85,10 +89,11 @@ public class BookRepository implements Repository {
 
     @Override
     public Book findEntity(String name) {
-  List<Book> books =manager.createQuery("SELECT b from Book b where b.name = :name")
+        List<Book> books =
+                manager .createQuery("SELECT b from Book b where b.name = :name")
                         .setParameter("name",name).getResultList();
-  if(!books.isEmpty())
-      return (Book) books.get(0);
-  return null;
+        if(!books.isEmpty())
+            return (Book) books.get(0);
+        return null;
     }
 }
