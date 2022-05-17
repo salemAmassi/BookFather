@@ -1,33 +1,33 @@
-Welcome to Kotobgy!
+Welcome to BookFather!
 -------------------
 
-Kotobgy is a modern open-source Bookstore manager with basic CRUD operations
+BookFather is a modern open-source Bookstore manager with basic CRUD operations
 built using Java and JPA.
 
 
 A lot of the basic features are available, more management features will be made available SOON™. Feel free to open issues!
 
-What makes Kotobgy different from other bookstore management software?
+What makes BookFather different from other bookstore management software?
 
 * **On-off components** Broken up view means you can easily fit any service into the main dashboard
 and have it feel like it's always been there. A bit of abstraction magic!
-* **Cross-Language support** With different customers in mind, Kotobgy offers separate
+* **Cross-Language support** With different customers in mind, BookFather offers separate
 language files, that can be swapped in or out, to directly affect the entire user interface.
 We plan on supporting Arabic and English, other languages may be included in future releases.
-* **Do it yourself.** Code simplicity and structure gives you the ability to make Kotobgy
+* **Do it yourself.** Code simplicity and structure gives you the ability to make BookFather
 suit your very own needs, with minimal rework. Have a feature in mind? 
-Relish the powers of [Open Source](https://github.com/salemAmassi/BookStore_Kotobgy/fork).
+Relish the powers of [Open Source](https://github.com/salemAmassi/BookFather/fork).
 
-Kotobgy may have fulfilled all fundamental objectives, but we're not stopping there. We have many feature ideas
-that we're anxious to add and other innovative accessibility options that we're planning to build into Kotobgy. 
-So take Kotobgy out for a spin and let us know how we can make it your favorite store manager. 
+BookFather may have fulfilled all fundamental objectives, but we're not stopping there. We have many feature ideas
+that we're anxious to add and other innovative accessibility options that we're planning to build into BookFather. 
+So take BookFather out for a spin and let us know how we can make it your favorite store manager. 
 
 
-Dependencies to run Kotobgy
+Dependencies to run BookFather
 -------------------------------
 #### Usage
 
-Kotobgy was made using IntelliJ IDEA and SceneBuilder, and uses the following libraries and plugin:
+BookFather was made using IntelliJ IDEA and SceneBuilder, and uses the following libraries and plugin:
 * Java SE         17.0.2
 * JavaFX          17.0.2
 * JPA             2.5.0
@@ -39,7 +39,7 @@ After configuring dependencies run Fxstore.java or build .jar.
 
 #### Need help?
 
-Having problems starting Kotobgy the first time? Scroll down for FAQ
+Having problems starting BookFather the first time? Scroll down for FAQ
 or send us your questions using our links below.
 
 
