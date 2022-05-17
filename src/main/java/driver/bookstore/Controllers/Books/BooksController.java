@@ -5,6 +5,7 @@ import driver.bookstore.Book.Book;
 import driver.bookstore.Book.BookRepository;
 import driver.bookstore.Controllers.DashboardController;
 import driver.bookstore.Controllers.SearchController;
+import driver.bookstore.CrudLogger;
 import driver.bookstore.FxStore;
 import driver.bookstore.Publisher.Publisher;
 import javafx.event.ActionEvent;
@@ -274,20 +275,15 @@ public class BooksController implements Initializable {
                             alert.setTitle("Delete " + bookData.getName() + " ?");
                             Optional<ButtonType> deleteConfirmation = alert.showAndWait();
                             if (deleteConfirmation.get() == ButtonType.OK) {
-//                                System.out.println("Delete Product");
-//                                System.out.println("book id: " + bookData.getId());
-//                                System.out.println("book name: " + bookData.getName());
-                                // TODO: fix delete operation
-
                                 Alert msg = new Alert(Alert.AlertType.INFORMATION);
                                 repository.deleteEntity(repository.findEntity(bookData.getName()));
-//                               if( repository.findEntity(bookData.getName())==null){
-//                                msg.setContentText("Delete operation done successfully");
-//                               }else{
-//                                   msg = new Alert(Alert.AlertType.ERROR);
-//                                   msg.setContentText("Something wrong has occurred");
-//                               }
                                 getTableView().getItems().remove(getIndex());
+                                try{
+                                    // Log operation success
+                                    CrudLogger.getInstance().logSuccess(bookData.getName()+" has been Deleted successfully");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                     }

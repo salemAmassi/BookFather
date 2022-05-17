@@ -24,6 +24,7 @@ public class FxStore extends Application {
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Book Store");
         primaryStage.show();
+        CrudLogger.getInstance().logSuccess("Test Log");
     }
 
     @Override

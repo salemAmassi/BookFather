@@ -24,7 +24,7 @@ public class Book implements Entity{
 
     // 13 Columns
     @Id @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @Column(name = "name", nullable = false, length = 200,  unique=true)
     String name;

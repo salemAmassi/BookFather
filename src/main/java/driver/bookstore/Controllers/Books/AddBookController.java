@@ -6,6 +6,7 @@ import driver.bookstore.Book.Book;
 import driver.bookstore.Book.BookRepository;
 import driver.bookstore.Category.Category;
 import driver.bookstore.Category.CategoryRepository;
+import driver.bookstore.CrudLogger;
 import driver.bookstore.Publisher.Publisher;
 import driver.bookstore.Publisher.PublisherRepository;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -72,7 +74,7 @@ public class AddBookController implements Initializable {
     }
 
     @FXML
-    private void btnAddBookOnAction() {
+    private void btnAddBookOnAction(){
         // Creates list with checkboxes representing categories
         chosenCategories = fieldAddBookCategory.getChildren().stream().filter(checkbox -> ((CheckBox) checkbox).isSelected()).map(checkbox -> (new Category(((CheckBox) checkbox).getText()))).collect(Collectors.toList());
 
@@ -113,6 +115,14 @@ public class AddBookController implements Initializable {
                         .build();
         bookRepository.addEntity(book);
         viewBookResponse.setVisible(true);
+
+        try{
+            // Log operation success
+            CrudLogger.getInstance().logSuccess(book.getName()+"Has been added successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static int getValue(String input) {

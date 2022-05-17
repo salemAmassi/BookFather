@@ -6,6 +6,7 @@ import driver.bookstore.Book.Book;
 import driver.bookstore.Book.BookRepository;
 import driver.bookstore.Category.Category;
 import driver.bookstore.Category.CategoryRepository;
+import driver.bookstore.CrudLogger;
 import driver.bookstore.Publisher.Publisher;
 import driver.bookstore.Publisher.PublisherRepository;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -147,6 +149,13 @@ public class EditBookController implements Initializable {
                         .build();
         bookRepository.updateEntity(book);  // Updates entity with new entity values
         viewBookResponse.setVisible(true);  // Notify interface with success
+
+        try{
+            // Log operation success
+            CrudLogger.getInstance().logSuccess(book.getName()+" has been Edited successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private int getValue(String input){

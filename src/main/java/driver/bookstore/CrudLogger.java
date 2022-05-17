@@ -6,13 +6,16 @@ import lombok.Setter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 @Getter
 // Operations logging class
 // You can find logs in logs.log
-public class CrudLogger  {
+public class CrudLogger {
 
     private static CrudLogger instance;
 
@@ -40,9 +43,25 @@ public class CrudLogger  {
         fileHandler = new FileHandler(logs.getName(),true);
         logger = Logger.getLogger("test");
         logger.addHandler(fileHandler);
-//        SimpleFormatter formatter = new SimpleFormatter();
-//        fileHandler.setFormatter(formatter);
+        SimpleFormatter formatter = new SimpleFormatter();
+        fileHandler.setFormatter(formatter);
     }
 
-    // TODO: Create log methods for CRUD operations.
+    public void logSuccess(String message) throws IOException {
+        FileWriter writer = new FileWriter(logs, true);
+        writer.write("INFO "+ Date.from(Instant.now())+": "+message+"\n");
+        writer.close();
+    }
+
+    public void logWarning(String message) throws IOException {
+        FileWriter writer = new FileWriter(logs, true);
+        writer.write("WARNING "+ Date.from(Instant.now())+": "+message+"\n");
+        writer.close();
+    }
+
+    public void logDanger(String message) throws IOException {
+        FileWriter writer = new FileWriter(logs, true);
+        writer.write("DANGER "+ Date.from(Instant.now())+": "+message+"\n");
+        writer.close();
+    }
 }
