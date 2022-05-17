@@ -51,7 +51,7 @@ public class BooksController implements Initializable {
     private ComboBox<String> searchCriteria;
 
     BookRepository repository;
-    public Book selectedBook;
+    public static Book selectedBook;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -164,7 +164,7 @@ public class BooksController implements Initializable {
     }
 
     @FXML
-    private void btnEditBook(int book_id) {
+    private void btnEditBook() {
         StackPane dashContent = DashboardController.getDashContent();
         File file  = new File("src/main/resources/Books/EditBook.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -176,28 +176,29 @@ public class BooksController implements Initializable {
         }
         dashContent.getChildren().clear();
         dashContent.getChildren().add(root);
-
-        EditBookController controller = fxmlLoader.getController();
-        controller.fillEditingBookFields(book_id);
+        EditBookController controller = new EditBookController();
+        fxmlLoader.setController(controller);
 
     }
 
     @FXML
-    private void btnViewProduct(int product_id) {
+    private void btnViewProduct() {
         StackPane dashContent = DashboardController.getDashContent();
         File file  = new File("src/main/resources/Books/ViewBook.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader();
         AnchorPane root = null;
+        FXMLLoader fxmlLoader =null;
         try {
-            root = fxmlLoader.load(file.toURI().toURL());
+            fxmlLoader = new FXMLLoader(file.toURI().toURL());
+            root = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
         dashContent.getChildren().clear();
         dashContent.getChildren().add(root);
-
-        ViewBookController controller = fxmlLoader.getController();
-        controller.fillViewingBookFields();
+        ViewBookController controller = new ViewBookController();
+        fxmlLoader.setController(controller);
+//        controller.setSelectedBook(book);
+        FxStore.primaryStage.setTitle(file.getName().substring(0,file.getName().lastIndexOf(".")));
     }
 
     //TODO: Use text formatters (double and integer)
@@ -217,9 +218,11 @@ public class BooksController implements Initializable {
                         viewButton.getStyleClass().add("xs");
                         viewButton.getStyleClass().add("info");
                         viewButton.setOnAction((ActionEvent event) -> {
-                            Book bookData = getTableView().getItems().get(getIndex());
-                            btnViewProduct(bookData.getId());
+                            selectedBook = getTableView().getItems().get(getIndex());
+
+                            btnViewProduct();
                         });
+
                     }
 
                     private final Button editButton = new Button("Edit");
@@ -229,8 +232,9 @@ public class BooksController implements Initializable {
                         editButton.getStyleClass().add("xs");
                         editButton.getStyleClass().add("primary");
                         editButton.setOnAction((ActionEvent event) -> {
-                            Book bookData = getTableView().getItems().get(getIndex());
-                            btnEditBook(bookData.getId());
+                            selectedBook = getTableView().getItems().get(getIndex());
+                            System.out.println(selectedBook.getCategories().size());
+                            btnEditBook();
                         });
                     }
 
@@ -242,18 +246,24 @@ public class BooksController implements Initializable {
                         deleteButton.getStyleClass().add("danger");
                         deleteButton.setOnAction((ActionEvent event) -> {
                             Book bookData = getTableView().getItems().get(getIndex());
-
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setHeaderText("Are you sure that you want to delete " + bookData.getName() + " ?");
                             alert.setTitle("Delete " + bookData.getName() + " ?");
                             Optional<ButtonType> deleteConfirmation = alert.showAndWait();
-
                             if (deleteConfirmation.get() == ButtonType.OK) {
-                                System.out.println("Delete Product");
-                                System.out.println("book id: " + bookData.getId());
-                                System.out.println("book name: " + bookData.getName());
+//                                System.out.println("Delete Product");
+//                                System.out.println("book id: " + bookData.getId());
+//                                System.out.println("book name: " + bookData.getName());
                                 // TODO: fix delete operation
-                                repository.deleteEntity(repository.findEntity(bookData.getId()));
+
+                                   Alert msg = new Alert(Alert.AlertType.INFORMATION);
+                                   repository.deleteEntity(repository.findEntity(bookData.getName()));
+//                               if( repository.findEntity(bookData.getName())==null){
+//                                msg.setContentText("Delete operation done successfully");
+//                               }else{
+//                                   msg = new Alert(Alert.AlertType.ERROR);
+//                                   msg.setContentText("Something wrong has occurred");
+//                               }
                                 getTableView().getItems().remove(getIndex());
                             }
                         });

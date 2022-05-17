@@ -928,8 +928,8 @@ VBox > .split-menu-button.last > .arrow-button {
 	-fx-pref-width: 5;
 }
 .figure{
-	-fx-border-radius: 30;
-	-fx-background-radius: 30;
 	-fx-end-margin: 20;
 	-fx-start-margin: 20;
+	-fx-background-color: #d08484;
+	-fx-background-radius: 100;
 }

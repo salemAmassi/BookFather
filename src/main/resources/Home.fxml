@@ -23,7 +23,7 @@
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
            <children>
-               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #d08484; -fx-border-radius: 25px;" styleClass="figure">
+               <HBox alignment="CENTER" prefHeight="230.0" prefWidth="462.0" style="-fx-background-color: #d08484; -fx-background-radius: 100px;" styleClass="figure">
                    <children>
                        <Label fx:id="booksCount" alignment="CENTER_RIGHT" text="0">
                            <font>

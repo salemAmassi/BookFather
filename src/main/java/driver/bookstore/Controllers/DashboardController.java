@@ -1,6 +1,7 @@
 package driver.bookstore.Controllers;
 
 import driver.bookstore.Controllers.Books.BooksController;
+import driver.bookstore.Controllers.Books.SellBookController;
 import driver.bookstore.FxStore;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,64 +19,41 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     @FXML
     private Button sellBookButton;
-//    @FXML
-//    private Button searchButton;
     @FXML
     private Button addBookButton;
-//    @FXML
-//    private TextField searchField;
-//    @FXML
-//    private ComboBox<String> searchCriteria;
-//    @FXML
-//    private FlowPane categoriesContainer;
     @FXML
     public Button btnHome;
     @FXML
-    public Button btnProducts;
-
-
+    public Button btnBooks;
     @FXML
     public AnchorPane dashHead;
     @FXML
     private StackPane dashContent;
     private static StackPane dashStackPane ;
-public static  StackPane getDashContent(){
+    public static  StackPane getDashContent(){
     return dashStackPane;
+}
+    public static void setDashStackPane(StackPane pane){
+    dashStackPane = pane;
 }
     public void btnHomeOnClick(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Home.fxml");
         DashboardController homeController = fxmlLoader.getController();
-//        homeController.getDashboardProdCount();
-//        homeController.getDashboardCostCount();
     }
 
     public void btnBooksOnClick(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/Books.fxml");
         BooksController controller = fxmlLoader.getController();
-//        controller.listBooks();
     }
     public void btnAddOnClick(ActionEvent event){
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/AddBook.fxml");
         BooksController controller = fxmlLoader.getController();
     }
-
-//    public void btnOrdersOnClick(ActionEvent actionEvent) {
-//        FXMLLoader fxmlLoader = loadFxmlPage("/view/admin/pages/orders/orders.fxml");
-////        OrdersController orders = fxmlLoader.getController();
-////        orders.listOrders();
-//    }
-
-//    public void btnCustomersOnClick(ActionEvent actionEvent) {
-//        FXMLLoader fxmlLoader = loadFxmlPage("/view/admin/pages/customers/customers.fxml");
-////        CustomersController controller = fxmlLoader.getController();
-////        controller.listCustomers();
-//    }
-//
-//    public void btnSettingsOnClick(ActionEvent actionEvent) {
-//        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Illus/settings/settings.fxml");
-//    }
-
-    //TODO: Remove Logout from fxml
+    @FXML
+    void btnSellOnClick(ActionEvent event) {
+        FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Books/SellBook.fxml");
+        SellBookController controller = fxmlLoader.getController();
+    }
 
     private FXMLLoader loadFxmlPage(String view_path) {
         File file  = new File(view_path);
@@ -95,12 +73,7 @@ public static  StackPane getDashContent(){
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        TODO: Move two lines to books view
-//        CategoryComponentFactory factory= new CategoryComponentFactory();
-//        categoriesContainer.getChildren().add(factory.createCategoryHBox("سياسة"));
         FXMLLoader fxmlLoader = loadFxmlPage("src/main/resources/Home.fxml");
         HomeController homeController = fxmlLoader.getController();
-//        homeController.getDashboardProdCount();
-//        homeController.getDashboardCostCount();
     }
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 /**Category Entity*/
@@ -17,7 +18,7 @@ import java.util.List;
 })
 @Setter
 @Getter
-public class Category {
+public class Category implements Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
@@ -33,5 +34,15 @@ public class Category {
     @Override
     public String toString() {
         return  name;
+    }
+
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
+    }
+
+    @Override
+    public String name() {
+        return null;
     }
 }

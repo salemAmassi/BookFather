@@ -25,7 +25,7 @@ public class AddBookController implements Initializable {
     BookRepository repository;
     @FXML
     public FlowPane fieldAddBookCategory;
-    public Text viewProductResponse;
+    public Text viewBookResponse;
     public TextField fieldAddBookTitle;
     public TextField fieldAddBookIsbn;
     public TextField fieldAddBookAuthor;
@@ -80,7 +80,6 @@ public class AddBookController implements Initializable {
         }else if(colors.getSelectedToggle() == bwChoice){
             paintColor = "0";
         }
-        String size = "B5";
         System.out.println(fieldAddBookSize.getSelectionModel().getSelectedItem());
         Author author = new Author(fieldAddBookAuthor.getText());
         Publisher publisher = new Publisher(fieldAddBookPublisher.getText());
@@ -102,71 +101,13 @@ public class AddBookController implements Initializable {
             .location(getValue(fieldAddBookLocation.getText()))
             .build();
             bookRepository.addEntity(book);
-
-            viewProductResponse.setVisible(true);
+            viewBookResponse.setVisible(true);
         }
-        private int getValue(String input){
+        public static int getValue(String input){
             try{
                 return Integer.parseInt(input);
             }catch (NumberFormatException ex){
                 return 0;
             }
     }
-
-//
-//    @FXML
-//    private void initialize() {
-//        //fieldAddProductCategoryId.setItems(FXCollections.observableArrayList(Datasource.getInstance().getProductCategories(Datasource.ORDER_BY_ASC)));
-//        // TODO: Format all fields
-//        TextFormatter<Double> textFormatterDouble = formatDoubleField();
-//        TextFormatter<Integer> textFormatterInt_page = formatIntField();
-//        TextFormatter<Integer> textFormatterInt_part = formatIntField();
-//        fieldAddBookPrice.setTextFormatter(textFormatterDouble);
-//        fieldAddBookPart.setTextFormatter(textFormatterInt_part);
-//        fieldAddBookPages.setTextFormatter(textFormatterInt_page);
-//    }
-//
-//    /**
-//     * This private method handles the add product button functionality.
-//     * It validates user input fields and adds the values to the database.
-//     * @since                   1.0.0
-//     */
-//    @FXML
-//    private void btnAddBookOnAction() {
-//        //TODO: retrieve entities on initialize, Category, Size, Cover, Source
-//        Category category = fieldAddBookCategory.getSelectionModel().getSelectedItem();
-//        int cat_id = 0;
-//        if (category != null) {
-//            //cat_id = category.id();
-//        }
-//
-//        assert category != null;
-//        //TODO: Fill validation with all items
-//        if (areProductInputsValid(fieldAddBookTitle.getText(), fieldAddBookAuthor.getText(),
-//                fieldAddBookPrice.getText(), fieldAddBookPart.getText(), cat_id)) {
-//
-//            // TODO: Sync database items with entity and include all fields
-////            String booktitle = fieldAddBookTitle.getText();
-////            String productDescription = fieldAddProductDescription.getText();
-////            double productPrice = Double.parseDouble(fieldAddProductPrice.getText());
-////            int productQuantity = Integer.parseInt(fieldAddProductQuantity.getText());
-////            int productCategoryId = category.getId();
-////
-////            Task<Boolean> addProductTask = new Task<Boolean>() {
-////                @Override
-////                protected Boolean call() {
-////                    return Datasource.getInstance().insertNewProduct(productName, productDescription, productPrice, productQuantity, productCategoryId);
-////                }
-////            };
-////
-////            addProductTask.setOnSucceeded(e -> {
-////                if (addProductTask.valueProperty().get()) {
-////                    viewProductResponse.setVisible(true);
-////                    System.out.println("Product added!");
-////                }
-////            });
-////
-////            new Thread(addProductTask).start();
-//        }
-//    }
 }

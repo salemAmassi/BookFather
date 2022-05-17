@@ -26,7 +26,7 @@ import java.util.List;
 public class Book implements Entity{
     //TODO: CREATE ALL QUERIES FOR BOOK, CATEGORY. (make them static)
     @Id @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
      int id;
     @Column(name = "name", nullable = false, length = 200,  unique=true)
      String name;

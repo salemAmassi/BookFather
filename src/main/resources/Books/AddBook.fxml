@@ -62,7 +62,7 @@
                         <TextField fx:id="fieldAddBookQuantity" layoutX="10.0" layoutY="25.0" promptText="Quantity in Stock" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Label layoutX="10.0" layoutY="357.0" text="Location" GridPane.columnIndex="3" GridPane.rowIndex="7" />
                         <TextField fx:id="fieldAddBookLocation" layoutX="114.0" layoutY="190.0" promptText="Location in Library" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                        <Text fx:id="viewProductResponse" fill="#22a424" strokeType="OUTSIDE" strokeWidth="0.0" text="Book added!" visible="false" BorderPane.alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Text fx:id="viewBookResponse" fill="#22a424" strokeType="OUTSIDE" strokeWidth="0.0" text="Book added!" visible="false" BorderPane.alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Button fx:id="btnAddBook" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnAddBookOnAction" prefHeight="31.0" prefWidth="131.0" styleClass="button, success" text="Add Book" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
                      </children>
                      <columnConstraints>
