@@ -12,11 +12,19 @@
     <class>driver.bookstore.Category.Category</class>
     <properties>
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
-        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookstore?serverTimezone=UTC"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/bookstore?serverTimezone=UTC"/>
         <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
         <property name="javax.persistence.jdbc.user" value="root"/>
         <property name="javax.persistence.jdbc.password" value=""/>
         <property name="javax.persistence.schema-generation.database.action" value="create"/>
+        <property name="eclipselink.logging.file" value="src/main/java/driver/bookstore/logs.log"/>
+        <property name="eclipselink.logging.logger" value="JavaLogger"/>
+        <property name="eclipselink.logging.level.sql" value="FINE"/>
+        <property name="eclipselink.allow-zero-id" value="true"/>
+        <property name="eclipselink.logging.session" value="true"/>
+        <property name="eclipselink.logging.exceptions" value="true"/>
+        <property name="eclipselink.logging.thread" value="true"/>
+        <property name="eclipselink.logging.timestamp" value="true"/>
     </properties>
 </persistence-unit>
 </persistence>

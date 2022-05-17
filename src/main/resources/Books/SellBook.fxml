@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="driver.bookstore.Controllers.Books.SellBookController">
+   <children>
+      <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="463.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sell Book">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="463.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Books: " wrappingWidth="128.453125">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <TableView fx:id="booksTable" layoutX="10.0" layoutY="109.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="76.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="bNameCol" prefWidth="145.0" text="Title" />
+                  <TableColumn fx:id="authCol" prefWidth="95.0" text="Author" />
+                  <TableColumn fx:id="priceCol" prefWidth="92.0" text="price" />
+                  <TableColumn fx:id="quantityCol" prefWidth="105.0" text="Quantity" />
+               </columns>
+            </TableView>
+            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="quantityField" promptText="quantityField" />
+                  <Button fx:id="addBook" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addBookHandle" prefHeight="31.0" prefWidth="187.0" text="Add to Cart" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="181.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <HBox prefHeight="45.0" prefWidth="88.0" style="-fx-background-radius: 100px; -fx-background-color: #5B84B1FF;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="88.0" style="-fx-font-weight: 10px; -fx-background-radius: 50px;" text="Cart" textFill="#fc766a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="purchasedBooksList" prefHeight="185.0" prefWidth="364.0">
+                     <columns>
+                        <TableColumn fx:id="purchaseTitleCol" prefWidth="114.0" text="Title" />
+                        <TableColumn fx:id="purchasePriceCol" prefWidth="75.0" text="Price" />
+                        <TableColumn fx:id="purchaseQuantityCol" prefWidth="75.0" text="Quantity" />
+                        <TableColumn fx:id="purchaseTotalCol" prefWidth="75.0" text="Total" />
+                     </columns>
+                  </TableView>
+                  <VBox alignment="CENTER" prefHeight="124.0" prefWidth="105.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="confirmSell" mnemonicParsing="false" onAction="#confirmSellHandle" styleClass="success" text="Confirm Sale" />
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonHandle" prefHeight="31.0" prefWidth="105.0" styleClass="fail" text="Delete" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="32.0" prefWidth="521.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="49.0" prefWidth="97.0" text="TOTAL:" />
+                  <Text fx:id="totalField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

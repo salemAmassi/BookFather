@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Our main driver of the project
@@ -16,7 +17,7 @@ public class FxStore extends Application {
     public static Stage primaryStage = new Stage();
     @Override
     public void start(Stage stage) throws IOException {
-        File dashboard  = new File("src/main/resources/Illus/main-dashboard.fxml");
+        File dashboard  = new File("src/main/resources/Main-Dashboard.fxml");
         Pane root = new FXMLLoader(dashboard.toURI().toURL()).load();
         Scene mainScene = new Scene(root);
         primaryStage = stage;

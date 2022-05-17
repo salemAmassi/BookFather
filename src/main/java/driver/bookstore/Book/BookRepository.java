@@ -14,7 +14,7 @@ public class BookRepository implements Repository {
     }
 
     @Override
-    public Book findEntity(Long id) {
+    public Book findEntity(int id) {
         return manager.find(Book.class,id);
     }
 
@@ -22,18 +22,18 @@ public class BookRepository implements Repository {
     @Override
     public Entity updateEntity(Entity entity) {
         Book temp = (Book) entity;
-        Book toUpdateBook =  findEntity(((long) temp.getId()));
+        Book toUpdateBook =  findEntity((temp.getName()));
         manager.getTransaction().begin();
         toUpdateBook.setName(temp.getName());
-//        toUpdateBook.setAuthors(temp.getAuthors());
-//        toUpdateBook.setCategories(temp.getCategories());
+        toUpdateBook.setAuthor(temp.getAuthor());
+        toUpdateBook.setCategories(temp.getCategories());
         toUpdateBook.setPageNo(temp.getPageNo());
         toUpdateBook.setPrice(temp.getPrice());
         toUpdateBook.setCover(temp.getCover());
         toUpdateBook.setIsbn(temp.getIsbn());
         toUpdateBook.setLocation(temp.getLocation());
         toUpdateBook.setPaintColor(temp.getPaintColor());
-//        toUpdateBook.setPublisher(temp.getPublisher());
+        toUpdateBook.setPublisher(temp.getPublisher());
         toUpdateBook.setQuantity(temp.getQuantity());
         temp.setPartNo(temp.getPartNo());
         manager.getTransaction().commit();
@@ -41,10 +41,12 @@ public class BookRepository implements Repository {
     }
 
     @Override
-    public void deleteEntity(Entity entity) {
+    public boolean deleteEntity(Entity entity) {
         Book book= ((Book) entity);
         manager.getTransaction().begin();
-        manager.remove(findEntity((long) book.getId()));
+        manager.remove(findEntity( book.getName()));
+        manager.getTransaction().commit();
+        return true;
     }
 
     @Override
@@ -54,28 +56,28 @@ public class BookRepository implements Repository {
     manager.getTransaction().commit();
     }
     //TODO: casting Object to Book
-public List<Book> getBookByCategory(String categoryName){
+//    public List<Book> getBookByCategory(String categoryName){
+//            TypedQuery<Book> query = manager.createQuery("SELECT " +
+//                    "   distinct b " +
+//                    "FROM " +
+//                    "Book b join b.categories  c " +
+//                    " where c.name = :categoryName ",Book.class).setParameter("categoryName",categoryName);
+//    List<Book> books =  query.getResultList();
+//    return books;
+//
+//    }
+
+    public List<Book> getAllBooks(){
+        return  manager.createQuery("SELECT b from Book b",Book.class).getResultList();
+    }
+    public List<Book> getBookByCategories(ArrayList<String> categories){
         TypedQuery<Book> query = manager.createQuery("SELECT " +
                 "   distinct b " +
                 "FROM " +
-                "Book b join b.categories  c " +
-                " where c.name = :categoryName ",Book.class).setParameter("categoryName",categoryName);
-List<Book> books =  query.getResultList();
-return books;
-
-}
-
-public List<Book> getAllBooks(){
-        return  manager.createQuery("SELECT b from Book b",Book.class).getResultList();
-}
-public List<Book> getBookByCategories(ArrayList<String> categories){
-    TypedQuery<Book> query = manager.createQuery("SELECT " +
-            "   distinct b " +
-            "FROM " +
-            "        Book b join b.categories  c " +
-            " where c.name in :categories ",Book.class).setParameter("categories",categories);
-    return query.getResultList();
-}
+                "        Book b join b.categories  c " +
+                " where c.name in :categories ",Book.class).setParameter("categories",categories);
+        return query.getResultList();
+    }
     @Override
     public void close() {
         manager.close();
@@ -83,6 +85,10 @@ public List<Book> getBookByCategories(ArrayList<String> categories){
 
     @Override
     public Book findEntity(String name) {
-        return manager.find(Book.class,name);
+  List<Book> books =manager.createQuery("SELECT b from Book b where b.name = :name")
+                        .setParameter("name",name).getResultList();
+  if(!books.isEmpty())
+      return (Book) books.get(0);
+  return null;
     }
 }
