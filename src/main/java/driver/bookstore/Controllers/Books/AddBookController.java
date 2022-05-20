@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import static driver.bookstore.Controllers.Books.BooksController.areProductInputsValid;
+
 
 public class AddBookController implements Initializable {
 
@@ -75,6 +77,15 @@ public class AddBookController implements Initializable {
 
     @FXML
     private void btnAddBookOnAction(){
+        if(!areProductInputsValid(fieldAddBookTitle.getText(), fieldAddBookIsbn.getText(), fieldAddBookAuthor.getText(), fieldAddBookPublisher.getText())){
+            try{
+                CrudLogger.getInstance().logWarning("Failure in adding book, Invalid Input");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
         // Creates list with checkboxes representing categories
         chosenCategories = fieldAddBookCategory.getChildren().stream().filter(checkbox -> ((CheckBox) checkbox).isSelected()).map(checkbox -> (new Category(((CheckBox) checkbox).getText()))).collect(Collectors.toList());
 
@@ -92,8 +103,22 @@ public class AddBookController implements Initializable {
         author = authorRepository.addEntity(author);
 
         // Creates publisher entity if no author with inserted name exists yet
-        Publisher publisher = new Publisher(fieldAddBookPublisher.getText());
+        Publisher publisher;
+        if (fieldAddBookPublisher.getText().isEmpty()){
+            publisher = new Publisher("Default");
+        }else{
+            publisher = new Publisher(fieldAddBookPublisher.getText());
+        }
         publisher = publisherRepository.addEntity(publisher);
+
+
+        int quantity;
+        if(fieldAddBookQuantity.getText().isEmpty()){
+            quantity = 1;
+        }
+        else{
+            quantity = getValue(fieldAddBookQuantity.getText());
+        }
 
         // Builds book entity with inserted values
         // 13 Columns
@@ -111,11 +136,11 @@ public class AddBookController implements Initializable {
                         .categories(chosenCategories)                                   //10
                         .publisher(publisher)                                           //11
                         .location(getValue(fieldAddBookLocation.getText()))             //12
-                        .quantity(getValue(fieldAddBookQuantity.getText()))             //13
+                        .quantity(quantity)                                             //13
                         .build();
         bookRepository.addEntity(book);
         viewBookResponse.setVisible(true);
-
+        clearFields();
         try{
             // Log operation success
             CrudLogger.getInstance().logSuccess(book.getName()+"Has been added successfully");
@@ -131,5 +156,23 @@ public class AddBookController implements Initializable {
         } catch (NumberFormatException ex) {
             return 0;
         }
+    }
+
+    //clear all fields
+    public void clearFields(){
+        fieldAddBookTitle.setText("");
+        fieldAddBookAuthor.setText("");
+        fieldAddBookPages.setText("");
+        fieldAddBookPrice.setText("");
+        fieldAddBookPart.setText("");
+        fieldAddBookLocation.setText("");
+        fieldAddBookQuantity.setText("");
+        fieldAddBookPublisher.setText("");
+        coloredChoice.setSelected(false);
+        bwChoice.setSelected(false);
+        fieldAddBookCategory.getChildren()
+                .stream()
+                .filter(checkbox-> ((CheckBox) checkbox).isSelected())
+                .forEach(checkbox-> ((CheckBox) checkbox).setSelected(false));
     }
 }

@@ -119,14 +119,12 @@ public class BooksController implements Initializable {
 
     // Universal input validation class
     // TODO: Implement in CRUD Controllers
-    boolean areProductInputsValid(String fieldAddBookTitle, String fieldAddBookIsbn, String fieldAddBookAuthor, String fieldAddBookPrice, String fieldAddBookPart, String fieldAddBookPages, String fieldAddBookPublisher, String fieldAddBookQuantity, String fieldAddBookLocation) {
+    static boolean areProductInputsValid(String fieldAddBookTitle, String fieldAddBookIsbn, String fieldAddBookAuthor,String fieldAddBookPublisher) {
         // TODO
         //  Better validate inputs.
         String errorMessage = "";
 
-//        if (productCategoryId == 0) {
-//            errorMessage += "Not valid category id!\n";
-//        }// TODO: Validate Categories
+        // TODO: Validate Categories
         if (fieldAddBookTitle == null || fieldAddBookTitle.length() < 3) {
             errorMessage += "Please enter a valid title!\n";
         }
@@ -134,30 +132,10 @@ public class BooksController implements Initializable {
         if (fieldAddBookIsbn != null && fieldAddBookIsbn.length() < 5) {
             errorMessage += "ISBN is not valid!\n";
         }
-        if (fieldAddBookAuthor != null || fieldAddBookAuthor.length() < 3) {
+        if (fieldAddBookAuthor != null && fieldAddBookAuthor.length() < 3) {
             errorMessage += "Please enter a valid author name!\n";
         }
-        //TODO: Properly Validate Price
-//        if (fieldAddBookPrice) {
-//            errorMessage += "Price is not valid!\n";
-//        }
-        //TODO: Properly Validate Part
-//        if (fieldAddBookPart)) {
-//            errorMessage += "Not valid Part!\n";
-//        }
-        //TODO: Properly Validate Quantity
-//        if (fieldAddBookQuantity)) {
-//            errorMessage += "Not valid Quantity!\n";
-//        }
-        //TODO: Properly Validate Quantity
-//        if (fieldAddBookPages)) {
-//            errorMessage += "Not valid Page!\n";
-//        }
-        //TODO: Properly Validate Location
-//        if (fieldAddBookLocation)) {
-//            errorMessage += "Not valid Location!\n";
-//        }
-        if (fieldAddBookPublisher != null || fieldAddBookPublisher.length() < 3) {
+        if (fieldAddBookPublisher != null && fieldAddBookPublisher.length() < 3) {
             errorMessage += "Please enter a valid publisher name!\n";
         }
 

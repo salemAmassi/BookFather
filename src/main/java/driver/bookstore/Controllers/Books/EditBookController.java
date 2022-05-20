@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import static driver.bookstore.Controllers.Books.BooksController.areProductInputsValid;
+
 /**
  * {@inheritDoc}
  */
@@ -57,6 +59,8 @@ public class EditBookController implements Initializable {
     private RadioButton coloredChoice;
     @FXML
     private RadioButton bwChoice;
+    @FXML
+    public ComboBox fieldAddBookSource;
     private Book selectedBook;
     ToggleGroup colors;
     BookRepository bookRepository;
@@ -106,6 +110,15 @@ public class EditBookController implements Initializable {
 
     @FXML
     void btnEditBookOnAction(ActionEvent event) {
+        if(!areProductInputsValid(nameEditField.getText(), isbnEditField.getText(), authorEditField.getText(), publisherEditField.getText())){
+            try{
+                CrudLogger.getInstance().logWarning("Failure in editing book, Invalid Input");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
         // Creates list with selected checkboxes representing categories
         List<Category> chosenCategories = fieldEditBookCategory.getChildren()
                .stream().filter(checkbox->((CheckBox)checkbox).isSelected())
@@ -126,8 +139,22 @@ public class EditBookController implements Initializable {
         author = authorRepository.addEntity(author);
 
         // Creates publisher entity if no author with inserted name exists yet
-        Publisher publisher = new Publisher(publisherEditField.getText());
+        Publisher publisher;
+        if (publisherEditField.getText().isEmpty()){
+            publisher = new Publisher("Default");
+        }else{
+            publisher = new Publisher(publisherEditField.getText());
+        }
         publisher = publisherRepository.addEntity(publisher);
+
+
+        int quantity;
+        if(quantityEditField.getText().isEmpty()){
+            quantity = 1;
+        }
+        else{
+            quantity = getValue(quantityEditField.getText());
+        }
 
         // Builds book entity with inserted values
         // 13 Columns
@@ -149,7 +176,7 @@ public class EditBookController implements Initializable {
                         .build();
         bookRepository.updateEntity(book);  // Updates entity with new entity values
         viewBookResponse.setVisible(true);  // Notify interface with success
-
+        clearFields();
         try{
             // Log operation success
             CrudLogger.getInstance().logSuccess(book.getName()+" has been Edited successfully");
@@ -171,23 +198,42 @@ public class EditBookController implements Initializable {
         sizeEditField.getItems().addAll("A4", "B5", "A5");
         sizeEditField.getSelectionModel().select(selectedBook.getSize());               //1
         coverEditField.getItems().addAll("Thick", "normal");
-        coverEditField.getSelectionModel().select(selectedBook.getCover());             //2
-        nameEditField.setText(selectedBook.getName());                                  //3
-        authorEditField.setText(selectedBook.getAuthor().getName());                    //4
-        publisherEditField.setText(selectedBook.getPublisher().getName());              //5
-        priceEditField.setText(selectedBook.getPrice()+"");                             //6
-        pageEditField.setText(selectedBook.getPageNo()+"");                             //7
-        partEditField.setText(selectedBook.getPartNo()+"");                             //8
-        quantityEditField.setText(selectedBook.getQuantity()+"");                       //9
-        locationEditField.setText(selectedBook.getLocation()+"");                       //10
-        isbnEditField.setText(selectedBook.getIsbn());                                  //11
+        fieldAddBookSource.getItems().addAll("Original", "other");                 //2
+        coverEditField.getSelectionModel().select(selectedBook.getCover());             //3
+        nameEditField.setText(selectedBook.getName());                                  //4
+        authorEditField.setText(selectedBook.getAuthor().getName());                    //5
+        publisherEditField.setText(selectedBook.getPublisher().getName());              //6
+        priceEditField.setText(selectedBook.getPrice()+"");                             //7
+        pageEditField.setText(selectedBook.getPageNo()+"");                             //8
+        partEditField.setText(selectedBook.getPartNo()+"");                             //9
+        quantityEditField.setText(selectedBook.getQuantity()+"");                       //10
+        locationEditField.setText(selectedBook.getLocation()+"");                       //11
+        isbnEditField.setText(selectedBook.getIsbn());                                  //12
         colors = new ToggleGroup();
         coloredChoice.setToggleGroup(colors);
-        bwChoice.setToggleGroup(colors);                                                //12
+        bwChoice.setToggleGroup(colors);                                                //13
         if(selectedBook.getPaintColor().equalsIgnoreCase(bwChoice.getText()))
             bwChoice.setSelected(true);
         else
             coloredChoice.setSelected(true);
-        getSelectedCategories();                                                        //13
+        getSelectedCategories();
+    }
+
+    //clear all fields
+    public  void clearFields(){
+        nameEditField.setText("");
+        authorEditField.setText("");
+        pageEditField.setText("");
+        priceEditField.setText("");
+        partEditField.setText("");
+        locationEditField.setText("");
+        quantityEditField.setText("");
+        publisherEditField.setText("");
+        coloredChoice.setSelected(false);
+        bwChoice.setSelected(false);
+        fieldEditBookCategory.getChildren()
+                .stream()
+                .filter(checkbox-> ((CheckBox) checkbox).isSelected())
+                .forEach(checkbox-> ((CheckBox) checkbox).setSelected(false));
     }
 }
